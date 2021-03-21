@@ -34,7 +34,7 @@ def admin_login():
     username = request.json.get("username")
     password = request.json.get("password")
 
-    if username == "admin" and password == "admin":
+    if username == "admin" and password == "admin123":
         session["username"] = username
         return jsonify("Login Success")
     else:

@@ -48,7 +48,7 @@ class DeleteBus extends Component {
         };
         console.log("Received values of form: ", values);
         axios
-          .delete("http://localhost:5000/bus/delete/"+values.busid
+          .delete("http://54.205.209.4/bus/delete/"+values.busid
               
           )
           .then(response => {

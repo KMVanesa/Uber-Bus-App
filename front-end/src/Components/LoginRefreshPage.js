@@ -40,7 +40,7 @@ class Signup extends Component {
             };
             console.log("Received values of form: ", values);
             axios
-              .post("http://localhost:5000/admin/login", 
+              .post("http://54.205.209.4/admin/login", 
                   {
                       "username": values.firstname,
                       "password": values.password

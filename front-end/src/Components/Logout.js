@@ -35,7 +35,7 @@ class LogoutPage extends Component {
 
   componentDidMount(){
         axios
-          .get("http://localhost:5000/admin/logout")
+          .get("http://54.205.209.4/admin/logout")
           .then(response => {
             console.log(response);
             this.setState({ res_received: true });

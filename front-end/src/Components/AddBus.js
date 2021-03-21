@@ -44,7 +44,7 @@ class AddBus extends Component {
         //delete values[""];
         console.log("Received values of form: ", values);
         axios
-          .post("http://localhost:5000/bus/new", {
+          .post("http://54.205.209.4/bus/new", {
             "bus_id": values.busid,
             "start": values.start,
             "end": values.end,

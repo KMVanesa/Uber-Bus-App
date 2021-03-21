@@ -33,11 +33,15 @@ class GetBus extends Component {
 
   componentDidMount(){
         axios
-          .get("http://localhost:5000/bus/all")
+          .get("http://54.205.209.4/bus/all")
           .then(response => {
             console.log(response);
-            this.setState({buses:response.data})
-            this.setState({res_received:true})
+            if(response.data!=="permission denied"){
+              this.setState({buses:response.data})
+              this.setState({res_received:true})
+            }else{
+              alert("ERROR: Unable to Fetch Buses!")
+            }
           })
           .catch(error => {
             alert("ERROR: Unable to Fetch Buses!")

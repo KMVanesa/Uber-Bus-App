@@ -44,7 +44,7 @@ class Signup extends Component {
         //delete values[""];
         console.log("Received values of form: ", values);
         axios
-          .post("http://localhost:3000/signup", {
+          .post("http://54.205.209.4/signup", {
             // "user" : {
             //   "provider" : "username",
             //   "data": {

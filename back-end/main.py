@@ -14,7 +14,7 @@ app = Flask(__name__)
 CORS(app)
 app.secret_key = "secrets"
 db = MongoClient(
-    "mongodb+srv://vkrutarth:Kmvanesa@trips.ugkzb.mongodb.net/trips?retryWrites=true&w=majority"
+    "mongodb+srv://vkrutarth:Kmvanesa@trips.ugkzb.mongodb.net/trips?retryWrites=true&w=majority",ssl=True,ssl_cert_reqs='CERT_NONE'
 )
 
 
@@ -36,6 +36,7 @@ def admin_login():
 
     if username == "admin" and password == "admin123":
         session["username"] = username
+        print(session)
         return jsonify("Login Success")
     else:
         return jsonify("Login Failed")
@@ -51,7 +52,6 @@ def admin_logout():
 # !Add Bus
 @app.route("/bus/new", methods=["POST"])
 def add_bus():
-    if "username" in session:
         bus_id = request.json.get("bus_id")
         start = request.json.get("start")
         end = request.json.get("end")
@@ -71,38 +71,65 @@ def add_bus():
         buses[trip["_id"]] = trip
         db["trips"]["buses"].insert_one(trip)
         return jsonify(trip)
-    else:
-        return jsonify("permission denied")
+    # if "username" in session:
+    #     bus_id = request.json.get("bus_id")
+    #     start = request.json.get("start")
+    #     end = request.json.get("end")
+    #     date = request.json.get("date")
+    #     duration = request.json.get("duration")
+    #     time = request.json.get("time")
+    #     seats = request.json.get("seats")
+    #     trip = dict(
+    #         start=start,
+    #         end=end,
+    #         duration=duration,
+    #         seats=seats,
+    #         date=datetime.datetime.strptime(date, "%d/%m/%Y"),
+    #         time=time,
+    #         _id=str(bus_id),
+    #     )
+    #     buses[trip["_id"]] = trip
+    #     db["trips"]["buses"].insert_one(trip)
+    #     return jsonify(trip)
+    # else:
+    #     return jsonify("permission denied")
 
 
 # !Get all Bus
 @app.route("/bus/all", methods=["GET"])
 def all_buses():
-    if "username" in session:
-        buses = list(db["trips"]["buses"].find())
-        return json.dumps(buses, cls=DateTimeEncoder)
-    else:
-        return jsonify("permission denied")
+    buses = list(db["trips"]["buses"].find())
+    return json.dumps(buses, cls=DateTimeEncoder)
+    # print(session)
+    # if "username" in session:
+    #     buses = list(db["trips"]["buses"].find())
+    #     return json.dumps(buses, cls=DateTimeEncoder)
+    # else:
+    #     return jsonify("permission denied")
 
 
 # !Delete Bus
 @app.route("/bus/delete/<bus_id>", methods=["DELETE"])
 def delete_bus(bus_id):
-    if "username" in session:
-        db["trips"]["buses"].delete_one({"_id": str(bus_id)})
-        return jsonify("success")
-    else:
-        return jsonify("permission denied")
+    # if "username" in session:
+    #     db["trips"]["buses"].delete_one({"_id": str(bus_id)})
+    #     return jsonify("success")
+    # else:
+    #     return jsonify("permission denied")
+    db["trips"]["buses"].delete_one({"_id": str(bus_id)})
+    return jsonify("success")
 
 
 # !Get all  trips
 @app.route("/trip/all", methods=["GET"])
 def all_trips():
-    if "username" in session:
-        trips = list(db["trips"]["trips"].find())
-        return json.dumps(trips, cls=DateTimeEncoder)
-    else:
-        return jsonify("permission denied")
+    trips = list(db["trips"]["trips"].find())
+    return json.dumps(trips, cls=DateTimeEncoder)
+    # if "username" in session:
+    #     trips = list(db["trips"]["trips"].find())
+    #     return json.dumps(trips, cls=DateTimeEncoder)
+    # else:
+    #     return jsonify("permission denied")
 
 
 # !Trip Booking
@@ -150,4 +177,4 @@ def delete_booking(user, trip_id):
 
 
 if __name__ == "__main__":
-    app.run(host="localhost", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)

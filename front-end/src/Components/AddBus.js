@@ -9,7 +9,7 @@ import { Form, Input, Button } from "antd";
 import { locales } from "moment";
 
 const stylePaper = {
-    height: '440px',
+    height: '640px',
     width: '400px',
     background: '#f8f8f9',
     position: 'relative',
@@ -27,7 +27,7 @@ const styleText = {
 
 const FormItem = Form.Item;
 
-class Signup extends Component {
+class AddBus extends Component {
   state = {
     res: {},
     res_received: false
@@ -44,35 +44,28 @@ class Signup extends Component {
         //delete values[""];
         console.log("Received values of form: ", values);
         axios
-          .post("http://localhost:3000/signup", {
-            // "user" : {
-            //   "provider" : "username",
-            //   "data": {
-            //     "username": values.firstname,
-            //     "password": values.password
-            //   }
-            // },
-            // "role": values.role,
-            // "firstname": values.firstname,
-            // "lastname":  values.lastname
-
-                "username": values.firstname,
-                "password": values.password,
-            "role": values.role,
-            "firstname": values.firstname,
-            "lastname":  values.lastname
+          .post("http://localhost:5000/bus/new", {
+            "bus_id": values.busid,
+            "start": values.start,
+            "end": values.end,
+            "date": values.date,
+            "duration":  values.duration,
+            "time":values.time,
+            "seats":values.seats
 
             }
           )
           .then(response => {
-            console.log(response);
-            localStorage.setItem('AuthToken' ,response.data.auth_token)
-            this.setState({ res: response.data });
-            this.setState({ res_received: true });
-            alert("Login Succesfull");
+            console.log(response.data);
+            if(response.data!=="permission denied"){
+                this.setState({ res: response.data });
+                this.setState({ res_received: true });
+            }else{
+                alert("ERROR While Adding Bus!");
+            }
           })
           .catch(error => {
-            alert("ERROR: User name already exists!");
+            alert("ERROR While Adding Bus!");
             console.log(error);
           });
       }
@@ -83,7 +76,7 @@ class Signup extends Component {
     const { getFieldDecorator } = this.props.form;
     let result = null;
     if (this.state.res_received) {
-      alert('Sign Up Succesful! Please go to "Ride" to book your ride.');
+      alert('Bus has been added succesfully.');
       console.log(this.state.res_recieved);
     }
 
@@ -98,36 +91,48 @@ class Signup extends Component {
               </div>
           </div>
           <FormItem>
-            {getFieldDecorator("firstname", {
-              rules: [{ required: true, message: "Please input your First Name!" }]
-            })(<Input placeholder="First Name" />)}
+            {getFieldDecorator("busid", {
+              rules: [{ required: true, message: "Please input your Bus id!" }]
+            })(<Input placeholder="Bus Id" />)}
           </FormItem>
           <FormItem>
-            {getFieldDecorator("lastname", {
-              rules: [{ required: true, message: "Please input your Last Name!" }]
-            })(<Input placeholder="Last Name" />)}
+            {getFieldDecorator("start", {
+              rules: [{ required: true, message: "Please input your Pick Up Location!" }]
+            })(<Input placeholder="Pick Up Location" />)}
           </FormItem>
           <FormItem>
-            {getFieldDecorator("email", {
+            {getFieldDecorator("end", {
               rules: [
-                {
-                  type: "email",
-                  message: "The input is not valid E-mail!"
-                },
                 {
                   required: true,
-                  message: "Please input your E-mail!"
+                  message: "Please input your Drop Location!"
                 }
               ]
-            })(<Input placeholder="Email" />)}
+            })(<Input placeholder="Drop Location" />)}
           </FormItem>
           <FormItem>
-            {getFieldDecorator("password", {
+            {getFieldDecorator("date", {
               rules: [
-                { required: true, message: "Please input your Password!" },
-                { min: 8, message: "Minimum password length is 8 characters" }
-              ]
-            })(<Input type="password" placeholder="Password" />)}
+                { required: true, message: "Please input your Date!" }              ]
+            })(<Input type="text" placeholder="Date" />)}
+          </FormItem>
+          <FormItem>
+            {getFieldDecorator("duration", {
+              rules: [
+                { required: true, message: "Please input Duraion!" }              ]
+            })(<Input type="text" placeholder="Duration" />)}
+          </FormItem>
+          <FormItem>
+            {getFieldDecorator("time", {
+              rules: [
+                { required: true, message: "Please input your Time!" }              ]
+            })(<Input type="text" placeholder="Time" />)}
+          </FormItem>
+          <FormItem>
+            {getFieldDecorator("seats", {
+              rules: [
+                { required: true, message: "Please input your Seats!" }              ]
+            })(<Input type="text" placeholder="Seats" />)}
           </FormItem>
         
           <FormItem>
@@ -136,7 +141,7 @@ class Signup extends Component {
               htmlType="submit"
               className="signup-form-button"
             >
-              SIGN UP
+              ADD A BUS
             </Button>
           </FormItem>
           {result}
@@ -146,6 +151,6 @@ class Signup extends Component {
   }
 }
 
-const Sign_up = Form.create()(Signup);
+const AddBusPage = Form.create()(AddBus);
 
-export default Sign_up;
+export default AddBusPage;

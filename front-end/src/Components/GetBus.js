@@ -27,7 +27,7 @@ const styleText = {
 
 const FormItem = Form.Item;
 
-class BookCab extends Component {
+class GetBus extends Component {
   state = {
     res: {},
     res_received: false
@@ -156,6 +156,6 @@ class BookCab extends Component {
   }
 }
 
-const Book_cab = Form.create()(BookCab);
+const GetBusPage = Form.create()(GetBus);
 
-export default Book_cab;
+export default GetBusPage;

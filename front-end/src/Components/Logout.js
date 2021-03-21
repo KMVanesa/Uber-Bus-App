@@ -29,16 +29,21 @@ const styleText = {
 class LogoutPage extends Component {
   state = {
     res: {},
+    reload:false,
     res_received: false
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
+  componentDidMount(){
         axios
           .get("http://localhost:5000/admin/logout")
           .then(response => {
             console.log(response);
             this.setState({ res_received: true });
+            localStorage.removeItem("loggedinuser")
+            this.setState({reload:true})
+            console.log(localStorage.getItem("loggedinuser"));
+            //if(this.state.reload)window.location.reload();
+            this.setState({reload:false})
           })
           .catch(error => {
             alert("ERROR: Unable to logout!");
@@ -49,9 +54,9 @@ class LogoutPage extends Component {
 
   render() {
    // this.state.res_received 
-    // const result = this.state.res_received !== undefined ?
-    // <Polarity sentence={this.state.sentence} polarity={this.state.polarity}/> :
-    // null;
+    // const result = localStorage.getItem("loggedinuser")!== "admin" ?
+    // <Home/> :
+    //null;
     return (
       <Paper style={stylePaper}>
         
@@ -60,6 +65,12 @@ class LogoutPage extends Component {
               <div style={styleText}>
                 You have been Logged Out Succesfully
               </div>
+             { window.onload = function() {
+                  if(!window.location.hash) {
+                      window.location = window.location + '#loaded';
+                      window.location.reload();}
+                  }
+              }
           </div>
           
       </Paper>

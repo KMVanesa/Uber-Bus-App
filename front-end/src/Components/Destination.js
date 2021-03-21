@@ -1,3 +1,51 @@
+// import React from 'react';
+// import Paper from 'material-ui/Paper';
+// import Divider from 'material-ui/Divider';
+// import TextField from 'material-ui/TextField';
+
+// const stylePaper = {
+//   height: '200px',
+//   width: '375px',
+//   background: '#f8f8f9',
+//   position: 'fixed',
+//   marginLeft:'12px',
+// };
+
+// const style = {
+//   marginLeft: '20px',
+//   //width: '100px'
+// };
+
+// const styleDivText = {
+//   marginTop: '40px'
+// };
+
+// const styleButton = {
+//   marginTop:'4px',
+//   marginLeft: '20px',
+//   width: '340px',
+//   height: '30px',
+//   backgroundColor:'#216C55',
+//   color: 'white'
+// };
+
+// const PaperExampleSimple = () => (
+//     <div>
+//       <Paper zDepth={1} style={stylePaper}>
+//       <div style={styleDivText}>
+//       <form>
+//         <TextField hintText="Pick Up Location" style={style} underlineShow={false} name="pickUpLocation" />
+//         <Divider />
+//         <TextField hintText="Destination" style={style} underlineShow={false} name="destination"/>
+//         <button style={styleButton}>Book A Cab</button>
+//       </form>
+//     </div>
+//       </Paper>
+//     </div>
+//   );
+
+//   export default PaperExampleSimple;
+
 import React, { Component } from "react";
 import axios from "axios";
 import "antd/dist/antd.css";
@@ -27,7 +75,7 @@ const styleText = {
 
 const FormItem = Form.Item;
 
-class BookCab extends Component {
+class Signup extends Component {
   state = {
     res: {},
     res_received: false
@@ -41,71 +89,35 @@ class BookCab extends Component {
           ...fieldsValue,
           role: 'driver'        
         };
-        //delete values[""];
         console.log("Received values of form: ", values);
+        localStorage.setItem('latitude', values.latitude);
+        localStorage.setItem('longitude', values.longitude);
+        const x = localStorage.getItem('latitude');
+        const y = localStorage.getItem('longitude');
         axios
-          .post("http://localhost:5000/trip/new", 
-          {
-            "bus": {
-              "start": this.state.start,
-              "end": this.state.end
-            },
-            "user": this.state.user
-          }
-          )
+          .get("http://localhost:5000/trip/all")
           .then(response => {
             console.log(response);
-            //localStorage.setItem('AuthToken' ,response.data.auth_token)
-            alert('Your Bus is on its way.')
-
+            localStorage.setItem('rides' ,response.data.auth_token)
+            this.setState({ res: response.data });
+            this.setState({ res_received: true });
+            alert('Your Cab is on its way.')
           })
           .catch(error => {
-            alert("ERROR: Unable to book Bus!")
+            alert("ERROR: Unable to book your cab. Please try again!")
             console.log(error);
           });
       }
     });
   };
 
-  handleAlternate(e) {
-    e.preventDefault();
-    this.props.form.validateFields((err, fieldsValue) => {
-      if (!err) {
-        const values = {
-          ...fieldsValue,
-          role: 'driver'        
-        };
-        //delete values[""];
-        console.log("Received values of form: ", values);
-        axios
-          .post("http://localhost:5000/trip/search", 
-          {
-              "start": this.state.start,
-              "end": this.state.end,
-              "date": this.state.date
-          }
-          )
-          .then(response => {
-            console.log(response);
-            //localStorage.setItem('AuthToken' ,response.data.auth_token)
-          })
-          .catch(error => {
-            alert("ERROR: No Buses Found!")
-            console.log(error);
-          });
-      }
-    });
-  }
-
-
-
   render() {
     const { getFieldDecorator } = this.props.form;
     let result = null;
-    // if (this.state.res_received) {
-    //   alert('Sign Up Succesful!');
-    //   console.log(this.state.res_recieved);
-    // }
+    if (this.state.res_received) {
+      alert('Sign Up Succesful!');
+      console.log(this.state.res_recieved);
+    }
 
     return (
       <Paper style={stylePaper}>
@@ -113,7 +125,7 @@ class BookCab extends Component {
         <Form onSubmit={this.handleSubmit} className="signup-form">
           <div style={{marginTop: '20px', marginBottom: '20px'}}> 
             <div style={styleText}>
-              Look for the Buses: 
+              Look For the Cabs Near you 
             </div>
           </div>
           <FormItem>
@@ -136,17 +148,8 @@ class BookCab extends Component {
               type="primary"
               htmlType="submit"
               className="signup-form-button"
-              onClick={this.handleAlternate.bind(this)}>
-              SEARCH FOR AVAILABLE BUSES
-            </Button>
-          </FormItem>
-          <FormItem>
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="signup-form-button"
             >
-              BOOK A  BUS
+              BOOK A  CAB
             </Button>
           </FormItem>
           {result}
@@ -156,6 +159,6 @@ class BookCab extends Component {
   }
 }
 
-const Book_cab = Form.create()(BookCab);
+const Sign_up = Form.create()(Signup);
 
-export default Book_cab;
+export default Sign_up;

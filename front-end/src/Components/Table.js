@@ -7,6 +7,8 @@ const Table = ({ rides }) => {
             <th>Booking Id</th>
             <th>Pick Up Location</th>
             <th>Drop Location</th>
+            <th>Date</th>
+            <th>Duration</th>
             <th>Time</th>
           </tr>
         </thead>

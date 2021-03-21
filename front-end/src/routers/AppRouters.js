@@ -7,7 +7,12 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import LoginPage from './../Components/LoginPage';
 import Logout from './../Components/Logout';
 import RidePage from './../Components/RidePage';
+import Admin from './../Components/Admin';
+import Search from './../Components/Search';
+import AddBus from './../Components/AddBus';
+import GetAllBus from './../Components/GetAllBus';
 import RidesHistory from './../Components/RidesHistory';
+import DeleteBusPage from './../Components/Deletebus'
 
 const AppRouter = () => (
     <BrowserRouter>
@@ -19,6 +24,11 @@ const AppRouter = () => (
                 <Route path="/Login" component={LoginPage} />
                 <Route path="/bookACab" component={RidePage} />
                 <Route path="/logout" component={Logout} />
+                <Route path="/admin" component={Admin} />
+                <Route path="/search" component={Search} />
+                <Route path="/addBus" component={AddBus} />
+                <Route path="/viewBuses" component={GetAllBus} />
+                <Route path="/deleteBus" component={DeleteBusPage} />
                 <Route component={NotFoundPage} />
             </Switch>
         </MuiThemeProvider>

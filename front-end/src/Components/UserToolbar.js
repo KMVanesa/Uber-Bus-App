@@ -3,7 +3,6 @@ import {Toolbar, ToolbarGroup} from 'material-ui/Toolbar';
 import FlatButton from 'material-ui/FlatButton';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import Admin from './../Components/Admin';
-import UserToolbar from './UserToolbar';
 const styleDiv = {
   padding: '0px 127px',
 };
@@ -43,17 +42,33 @@ const styleInkBar = {
   background:'white',
 };
 
-export default class ToolbarExamplesSimple extends React.Component {
+export default class UserToolbar extends React.Component {
 
   render() {
-    var user = localStorage.getItem("loggedinuser");
-    const toolbar = user!=="admin"?<UserToolbar/>:<Admin/>;
-    console.log("userrrrrr  "+user)
     return (
       <div style={styleDiv}>
-              {toolbar}
 
-        
+        <Toolbar style={styleToolbar}>
+          <ToolbarGroup>
+            <FlatButton 
+              label='UBER' 
+              hoverColor='white'
+              style= {styleUber}
+              href="/"
+            /> 
+            <Tabs style={styleTabs} inkBarStyle={styleInkBar}>
+              <Tab label="Book A Cab" style={StyleTab.TabLeft} href="/bookACab">
+              </Tab>
+              <Tab label="Your Rides" style={StyleTab.TabLeft} href="/yourRides">
+              </Tab>
+              <Tab label="Search" style={StyleTab.TabLeft} href="/search">
+              </Tab>
+            </Tabs> 
+          </ToolbarGroup>
+          <ToolbarGroup>
+            <FlatButton label="Login" style={StyleTab.TabRight} href="/Login" />
+          </ToolbarGroup>
+        </Toolbar>
       </div>  
     );
   }

@@ -43,7 +43,7 @@ class Search extends Component {
         };
         console.log("Received values of form: ", values);
         axios
-          .post("http://localhost:5000/trip/booking", 
+          .post("http://54.205.209.4/trip/booking", 
               {
                   "user": values.username,
                   "trip_id": values.bookingid

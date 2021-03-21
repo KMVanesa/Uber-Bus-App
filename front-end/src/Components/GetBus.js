@@ -44,7 +44,7 @@ class GetBus extends Component {
         //delete values[""];
         console.log("Received values of form: ", values);
         axios
-          .post("http://localhost:5000/trip/new", 
+          .post("http://54.205.209.4/trip/new", 
           {
             "bus": {
               "start": this.state.start,
@@ -78,7 +78,7 @@ class GetBus extends Component {
         //delete values[""];
         console.log("Received values of form: ", values);
         axios
-          .post("http://localhost:5000/trip/search", 
+          .post("http://54.205.209.4/trip/search", 
           {
               "start": this.state.start,
               "end": this.state.end,

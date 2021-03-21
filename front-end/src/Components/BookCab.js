@@ -48,7 +48,7 @@ class BookCab extends Component {
         };
         console.log("Received values of form: ", values);
         axios
-          .post("http://localhost:5000/trip/new", 
+          .post("http://54.205.209.4/trip/new", 
           {
             "user": values.username,
             "bus": values.bus
@@ -78,7 +78,7 @@ class BookCab extends Component {
         };
         console.log("Received values of form: ", values);
         axios
-          .post("http://localhost:5000/trip/search", 
+          .post("http://54.205.209.4/trip/search", 
           {
               "start": values.start,
               "end": values.end,

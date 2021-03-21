@@ -95,7 +95,7 @@ class Signup extends Component {
         const x = localStorage.getItem('latitude');
         const y = localStorage.getItem('longitude');
         axios
-          .get("http://localhost:5000/trip/all")
+          .get("http://54.205.209.4/trip/all")
           .then(response => {
             console.log(response);
             localStorage.setItem('rides' ,response.data.auth_token)

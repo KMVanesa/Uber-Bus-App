@@ -17,14 +17,14 @@ import Table from "../Components/Table";
         };
       }
     componentDidMount(){
-        axios.get('http://localhost:5000/trip/all')
+        axios.get('http://54.205.209.4/trip/all')
         .then(response => {
           console.log(response.data);
           if(response.data!=="permission denied"){
               this.setState({rides: response.data });
               this.setState({ res_received: true });
           }else{
-              alert("ERROR While Adding Bus!");
+              alert("ERROR While Loading Rides!");
           }
         })
     }

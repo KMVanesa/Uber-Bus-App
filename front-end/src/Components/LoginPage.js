@@ -103,7 +103,6 @@ class Signup extends Component {
             >
               LOGIN
             </Button>
-            Or <a href="/UserSignIn">Sign Up</a>
           </FormItem>
           {result}
         </Form>

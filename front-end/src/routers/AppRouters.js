@@ -7,7 +7,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import LoginPage from './../Components/LoginPage';
 import Logout from './../Components/Logout';
 import RidePage from './../Components/RidePage';
-import MapPage from './../Components/MapPage';
 import RidesHistory from './../Components/RidesHistory';
 
 const AppRouter = () => (
@@ -20,7 +19,6 @@ const AppRouter = () => (
                 <Route path="/Login" component={LoginPage} />
                 <Route path="/bookACab" component={RidePage} />
                 <Route path="/logout" component={Logout} />
-                <Route path="/map" component={MapPage} />
                 <Route component={NotFoundPage} />
             </Switch>
         </MuiThemeProvider>

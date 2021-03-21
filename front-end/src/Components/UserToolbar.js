@@ -2,7 +2,6 @@ import React from 'react';
 import {Toolbar, ToolbarGroup} from 'material-ui/Toolbar';
 import FlatButton from 'material-ui/FlatButton';
 import {Tabs, Tab} from 'material-ui/Tabs';
-import Admin from './../Components/Admin';
 const styleDiv = {
   padding: '0px 127px',
 };
@@ -59,8 +58,7 @@ export default class UserToolbar extends React.Component {
             <Tabs style={styleTabs} inkBarStyle={styleInkBar}>
               <Tab label="Book A Cab" style={StyleTab.TabLeft} href="/bookACab">
               </Tab>
-              <Tab label="Your Rides" style={StyleTab.TabLeft} href="/yourRides">
-              </Tab>
+             
               <Tab label="Search" style={StyleTab.TabLeft} href="/search">
               </Tab>
             </Tabs> 

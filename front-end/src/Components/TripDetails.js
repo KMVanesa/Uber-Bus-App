@@ -7,32 +7,66 @@ const stylePaper = {
     marginLeft:'-150px',
     marginTop: '90px'
 };
-const TripDetails = ({ id, username, start, end, date, duration, time }) => {
-    return (
-      <table style={stylePaper}>
-        <thead>
-          <tr>
-            <th>Username</th>
-            <th>Booking Id</th>
-            <th>Pick Up Location</th>
-            <th>Drop Location</th>
-            <th>Date</th>
-            <th>Duration</th>
-            <th>Time</th>
-          </tr>
-        </thead>
-        <tbody>
-              <tr key={ username }>
-                <td>{ id}</td>
-                <td>{ start }</td>
-                <td>{ end}</td>
-                <td>{ date }</td>
-                <td>{ duration}</td>
-                <td>{ time }</td>
-              </tr>
-        </tbody>
-      </table>
-    );
-  }
+// const TripDetails = ({ trips }) => {
+//     return (
+//       <table style={stylePaper}>
+//         <thead>
+//           <tr>
+//             <th>Username</th>
+//             <th>Booking Id</th>
+//             <th>Pick Up Location</th>
+//             <th>Drop Location</th>
+//             <th>Date</th>
+//             <th>Duration</th>
+//             <th>Time</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//               <tr key={ username }>
+//                 <td>{ id}</td>
+//                 <td>{ start }</td>
+//                 <td>{ end}</td>
+//                 <td>{ date }</td>
+//                 <td>{ duration}</td>
+//                 <td>{ time }</td>
+//               </tr>
+//         </tbody>
+//       </table>
+//     );
+//   }
 
-  export default TripDetails;
+//   export default TripDetails;
+
+
+const TripDetails = ({ trips }) => {
+  return (
+    <table style={stylePaper}>
+      <thead>
+        <tr>
+          <th>Booking Id</th>
+          <th>Pick Up Location</th>
+          <th>Drop Location</th>
+          <th>Date</th>
+          <th>Duration</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        { (trips.length > 0) ? trips.map( (ride, index) => {
+           return (
+            <tr key={ index }>
+              <td>{ ride._id }</td>
+              <td>{ ride.start }</td>
+              <td>{ ride.end}</td>
+              <td>{ ride.date }</td>
+              <td>{ ride.duration }</td>
+              <td>{ ride.time }</td>
+            </tr>
+          )
+         }) : <tr><td colSpan="5">Loading...</td></tr> }
+      </tbody>
+    </table>
+  );
+}
+
+export default TripDetails;

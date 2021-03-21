@@ -5,7 +5,6 @@ import Paper from 'material-ui/Paper';
 import Avatar from 'material-ui/Avatar';
 import SignInImage from './Images/download.jpg';
 import { Form, Input, Button } from "antd";
-import TripDetails from './../Components/TripDetails';
 
 
 const stylePaper = {
@@ -54,13 +53,10 @@ class DeleteBus extends Component {
           )
           .then(response => {
             console.log(response);
-            if(response.data!=="permission denied"){
                 this.setState({ res: response.data });
                 this.setState({ res_received: true });
-                alert("ERROR: Bus Deleted Succesfully");
-            }else{
-                alert("ERROR while deleting Bus");
-            }
+                alert("Bus Deleted Succesfully");
+
             
           })
           .catch(error => {

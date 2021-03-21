@@ -62,6 +62,8 @@ export default class Admin extends React.Component {
               </Tab>
               <Tab label="Delete A Bus" style={StyleTab.TabLeft} href="/deleteBus">
               </Tab>
+              <Tab label="Your Rides" style={StyleTab.TabLeft} href="/yourRides">
+              </Tab>
             </Tabs> 
           </ToolbarGroup>
           <ToolbarGroup>

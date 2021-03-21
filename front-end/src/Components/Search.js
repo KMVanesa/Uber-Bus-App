@@ -5,7 +5,7 @@ import Paper from 'material-ui/Paper';
 import Avatar from 'material-ui/Avatar';
 import SignInImage from './Images/download.jpg';
 import { Form, Input, Button } from "antd";
-import TripDetails from './../Components/TripDetails';
+import BookingDetails from './../Components/BookingDetails';
 
 
 const stylePaper = {
@@ -29,14 +29,8 @@ const FormItem = Form.Item;
 
 class Search extends Component {
   state = {
-    "username": "",
-    "id": "",
-    "start":"",
-    "end":"",
-    "duration":"",
-    "seats":"",
-    "date":"",
-    "time":""
+    "trip":{},
+    "res_received":false
   };
 
   handleSubmit = e => {
@@ -51,14 +45,14 @@ class Search extends Component {
         axios
           .post("http://localhost:5000/trip/booking", 
               {
-                  "user": this.state.username,
-                  "trip_id": this.state.id
+                  "user": values.username,
+                  "trip_id": values.bookingid
               }
           )
           .then(response => {
-            console.log(response);
+            console.log(response.data);
             localStorage.setItem('AuthToken' ,response.data.auth_token)
-            this.setState({ res: response.data });
+            this.setState({ trip: response.data });
             this.setState({ res_received: true });
           })
           .catch(error => {
@@ -73,18 +67,10 @@ class Search extends Component {
     const { getFieldDecorator } = this.props.form;
     let result = null;
     if (this.state.res_received) {
-      alert('Login Succesful! Please go to "Ride" to book your ride.');
       result = this.state.res_recieved;
       console.log(this.state.res_recieved);
     }
-    const res = result!==null?<TripDetails
-                                 id={this.state.id}
-                                  username={this.state.username} 
-                                 start={this.state.start}
-                                 end={this.state.end}
-                                 date={this.state.date}
-                                 duration={this.state.duration}
-                                 time={this.state.time}/>:null;
+    const res = result!==null?<BookingDetails trips={this.state.trip}/>:null;
     return (
       <Paper style={stylePaper}>
         

@@ -27,7 +27,7 @@ const styleText = {
 
 class GetBus extends Component {
   state = {
-    res: {},
+    buses: {},
     res_received: false
   };
 
@@ -36,6 +36,8 @@ class GetBus extends Component {
           .get("http://localhost:5000/bus/all")
           .then(response => {
             console.log(response);
+            this.setState({buses:response.data})
+            this.setState({res_received:true})
           })
           .catch(error => {
             alert("ERROR: Unable to Fetch Buses!")
@@ -47,21 +49,13 @@ class GetBus extends Component {
   render() {
     let result = null;
     if (this.state.res_received) {
-      alert('Login Succesful! Please go to "Ride" to book your ride.');
       result = this.state.res_recieved;
       console.log(this.state.res_recieved);
     }
-    const res = result!==null?<BusDetails
-                                 id={this.state.id}
-                                  seats={this.state.seats} 
-                                 start={this.state.start}
-                                 end={this.state.end}
-                                 date={this.state.date}
-                                 duration={this.state.duration}
-                                 time={this.state.time}/>:null;
+    const res = result!==null?<BusDetails buses={this.state.buses}/>:null;
 
     return (
-      <Paper style={stylePaper}>
+      <Paper >
         
         {res}
       </Paper>

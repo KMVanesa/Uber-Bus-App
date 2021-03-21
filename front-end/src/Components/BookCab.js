@@ -4,12 +4,15 @@ import "antd/dist/antd.css";
 import "./Example.css";
 import Paper from 'material-ui/Paper';
 import Avatar from 'material-ui/Avatar';
+import TripDetails from './../Components/TripDetails';
+
 import DriverImage from './Images/driver.jpg';
 import { Form, Input, Button } from "antd";
+import BookingConfirmation from "./BookingConfirmation";
 //import { locales } from "moment";
 
 const stylePaper = {
-  height: '360px',
+  height: '500px',
   width: '375px',
   background: '#f8f8f9',
   position: 'relative',
@@ -29,8 +32,10 @@ const FormItem = Form.Item;
 
 class BookCab extends Component {
   state = {
-    res: {},
-    res_received: false
+    res: [],
+    bookDetails:[],
+    res_received: false,
+    book:false
   };
 
   handleSubmit = e => {
@@ -41,23 +46,19 @@ class BookCab extends Component {
           ...fieldsValue,
           role: 'driver'        
         };
-        //delete values[""];
         console.log("Received values of form: ", values);
         axios
           .post("http://localhost:5000/trip/new", 
           {
-            "bus": {
-              "start": this.state.start,
-              "end": this.state.end
-            },
-            "user": this.state.user
+            "user": values.username,
+            "bus": values.bus
           }
           )
           .then(response => {
-            console.log(response);
-            //localStorage.setItem('AuthToken' ,response.data.auth_token)
+            console.log(response.data);
+            this.setState({book:true})
+            this.setState({bookDetails:response.data})
             alert('Your Bus is on its way.')
-
           })
           .catch(error => {
             alert("ERROR: Unable to book Bus!")
@@ -75,19 +76,19 @@ class BookCab extends Component {
           ...fieldsValue,
           role: 'driver'        
         };
-        //delete values[""];
         console.log("Received values of form: ", values);
         axios
           .post("http://localhost:5000/trip/search", 
           {
-              "start": this.state.start,
-              "end": this.state.end,
-              "date": this.state.date
+              "start": values.start,
+              "end": values.end,
+              "date": values.date
           }
           )
           .then(response => {
-            console.log(response);
-            //localStorage.setItem('AuthToken' ,response.data.auth_token)
+            console.log(response.data);
+            this.setState({res:response.data})
+            this.setState({res_received:true})
           })
           .catch(error => {
             alert("ERROR: No Buses Found!")
@@ -101,12 +102,13 @@ class BookCab extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    let result = null;
-    // if (this.state.res_received) {
-    //   alert('Sign Up Succesful!');
-    //   console.log(this.state.res_recieved);
-    // }
-
+    let result=null
+    if (this.state.res_received) {
+      result = this.state.res_recieved;
+      console.log(this.state.res_recieved);
+    }
+    const res = (this.state.book===false&&result!==null)?<TripDetails trips={this.state.res}/>:null;
+    const bookres = this.state.book===true?<BookingConfirmation trips={this.state.bookDetails}/>:null;
     return (
       <Paper style={stylePaper}>
         
@@ -122,14 +124,24 @@ class BookCab extends Component {
             })(<Input placeholder="User Name" />)}
           </FormItem>
           <FormItem>
-            {getFieldDecorator("latitude", {
+            {getFieldDecorator("start", {
               rules: [{ required: true, message: "Please input your Pick up location" }]
             })(<Input placeholder="Pick up location" />)}
           </FormItem>
           <FormItem>
-            {getFieldDecorator("longitude", {
+            {getFieldDecorator("end", {
               rules: [{ required: true, message: "Please input your Drop location" }]
             })(<Input placeholder="Drop location" />)}
+          </FormItem>
+          <FormItem>
+            {getFieldDecorator("date", {
+              rules: [{ required: true, message: "Please input your Date" }]
+            })(<Input placeholder="Date" />)}
+          </FormItem>
+          <FormItem>
+            {getFieldDecorator("bus", {
+              rules: [{  message: "Please input your Bus id" }]
+            })(<Input placeholder="Bus id" />)}
           </FormItem>
           <FormItem>
             <Button
@@ -149,7 +161,8 @@ class BookCab extends Component {
               BOOK A  BUS
             </Button>
           </FormItem>
-          {result}
+          {res}
+          {bookres}
         </Form>
       </Paper>
     );

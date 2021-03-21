@@ -17,14 +17,15 @@ import Table from "../Components/Table";
         };
       }
     componentDidMount(){
-        fetch('http://localhost:5000/trip/all').then(response => response.json())
-        .then((data) => {
-        for (let i = 0; i < data.length; i++) {
-            this.setState({
-            rides: data[i].rides
-            });
-            console.log(data[i])   
-        }
+        axios.get('http://localhost:5000/trip/all')
+        .then(response => {
+          console.log(response.data);
+          if(response.data!=="permission denied"){
+              this.setState({rides: response.data });
+              this.setState({ res_received: true });
+          }else{
+              alert("ERROR While Adding Bus!");
+          }
         })
     }
          

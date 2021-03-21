@@ -13,6 +13,7 @@ import AddBus from './../Components/AddBus';
 import GetAllBus from './../Components/GetAllBus';
 import RidesHistory from './../Components/RidesHistory';
 import DeleteBusPage from './../Components/Deletebus'
+import BookingConfirmation from './../Components/BookingConfirmation'
 
 const AppRouter = () => (
     <BrowserRouter>
@@ -29,6 +30,7 @@ const AppRouter = () => (
                 <Route path="/addBus" component={AddBus} />
                 <Route path="/viewBuses" component={GetAllBus} />
                 <Route path="/deleteBus" component={DeleteBusPage} />
+                <Route path="/bookingConfirmation" component={BookingConfirmation}/>
                 <Route component={NotFoundPage} />
             </Switch>
         </MuiThemeProvider>

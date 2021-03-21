@@ -4,10 +4,10 @@ const stylePaper = {
     float:'left',   
     background: '#f8f8f9',
     marginRight:'30px',
-    marginLeft:'-150px',
+    marginLeft:'150px',
     marginTop: '90px'
 };
-const BusDetails = ({ id, seats, start, end, date, duration, time }) => {
+const BusDetails = ({ buses }) => {
     return (
       <table style={stylePaper}>
         <thead>
@@ -22,15 +22,20 @@ const BusDetails = ({ id, seats, start, end, date, duration, time }) => {
           </tr>
         </thead>
         <tbody>
-              <tr key={ id }>
-                <td>{ start }</td>
-                <td>{ end}</td>
-                <td>{ date }</td>
-                <td>{ duration}</td>
-                <td>{ time }</td>
-                <td>{ seats}</td>
+        { (buses.length > 0) ? buses.map( (bus, index) => {
+              return (
+              <tr key={ index }>
+                  <td>{ bus._id }</td>
+                <td>{ bus.start }</td>
+                <td>{ bus.end}</td>
+                <td>{ bus.date }</td>
+                <td>{ bus.duration}</td>
+                <td>{ bus.time }</td>
+                <td>{ bus.seats}</td>
 
               </tr>
+              )
+            }) :null}
         </tbody>
       </table>
     );

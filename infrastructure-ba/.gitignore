@@ -4,6 +4,7 @@
 
 ### Terraform ###
 # Local .terraform directories
+variables.tf
 **/.terraform/*
 krutarth.pem
 .terraform.*

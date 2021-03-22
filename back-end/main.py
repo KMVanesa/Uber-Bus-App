@@ -71,28 +71,6 @@ def add_bus():
         buses[trip["_id"]] = trip
         db["trips"]["buses"].insert_one(trip)
         return jsonify(trip)
-    # if "username" in session:
-    #     bus_id = request.json.get("bus_id")
-    #     start = request.json.get("start")
-    #     end = request.json.get("end")
-    #     date = request.json.get("date")
-    #     duration = request.json.get("duration")
-    #     time = request.json.get("time")
-    #     seats = request.json.get("seats")
-    #     trip = dict(
-    #         start=start,
-    #         end=end,
-    #         duration=duration,
-    #         seats=seats,
-    #         date=datetime.datetime.strptime(date, "%d/%m/%Y"),
-    #         time=time,
-    #         _id=str(bus_id),
-    #     )
-    #     buses[trip["_id"]] = trip
-    #     db["trips"]["buses"].insert_one(trip)
-    #     return jsonify(trip)
-    # else:
-    #     return jsonify("permission denied")
 
 
 # !Get all Bus
@@ -100,22 +78,11 @@ def add_bus():
 def all_buses():
     buses = list(db["trips"]["buses"].find())
     return json.dumps(buses, cls=DateTimeEncoder)
-    # print(session)
-    # if "username" in session:
-    #     buses = list(db["trips"]["buses"].find())
-    #     return json.dumps(buses, cls=DateTimeEncoder)
-    # else:
-    #     return jsonify("permission denied")
 
 
 # !Delete Bus
 @app.route("/bus/delete/<bus_id>", methods=["DELETE"])
 def delete_bus(bus_id):
-    # if "username" in session:
-    #     db["trips"]["buses"].delete_one({"_id": str(bus_id)})
-    #     return jsonify("success")
-    # else:
-    #     return jsonify("permission denied")
     db["trips"]["buses"].delete_one({"_id": str(bus_id)})
     return jsonify("success")
 
@@ -125,11 +92,6 @@ def delete_bus(bus_id):
 def all_trips():
     trips = list(db["trips"]["trips"].find())
     return json.dumps(trips, cls=DateTimeEncoder)
-    # if "username" in session:
-    #     trips = list(db["trips"]["trips"].find())
-    #     return json.dumps(trips, cls=DateTimeEncoder)
-    # else:
-    #     return jsonify("permission denied")
 
 
 # !Trip Booking

@@ -3,10 +3,7 @@ import axios from "axios";
 import "antd/dist/antd.css";
 import "./Example.css";
 import Paper from 'material-ui/Paper';
-import Avatar from 'material-ui/Avatar';
-import DriverImage from './Images/driver.jpg';
 import { Form, Input, Button } from "antd";
-//import { locales } from "moment";
 
 const stylePaper = {
   height: '360px',
@@ -41,7 +38,6 @@ class GetBus extends Component {
           ...fieldsValue,
           role: 'driver'
         };
-        //delete values[""];
         console.log("Received values of form: ", values);
         axios
           .post("http://54.83.37.177/trip/new",
@@ -55,7 +51,6 @@ class GetBus extends Component {
           )
           .then(response => {
             console.log(response);
-            //localStorage.setItem('AuthToken' ,response.data.auth_token)
             alert('Your Bus is on its way.')
 
           })
@@ -75,7 +70,6 @@ class GetBus extends Component {
           ...fieldsValue,
           role: 'driver'
         };
-        //delete values[""];
         console.log("Received values of form: ", values);
         axios
           .post("http://54.83.37.177/trip/search",
@@ -87,7 +81,6 @@ class GetBus extends Component {
           )
           .then(response => {
             console.log(response);
-            //localStorage.setItem('AuthToken' ,response.data.auth_token)
           })
           .catch(error => {
             alert("ERROR: No Buses Found!")
@@ -102,11 +95,6 @@ class GetBus extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     let result = null;
-    // if (this.state.res_received) {
-    //   alert('Sign Up Succesful!');
-    //   console.log(this.state.res_recieved);
-    // }
-
     return (
       <Paper style={stylePaper}>
 

@@ -3,13 +3,10 @@ import axios from "axios";
 import "antd/dist/antd.css";
 import "./Example.css";
 import Paper from 'material-ui/Paper';
-import Avatar from 'material-ui/Avatar';
 import TripDetails from './../Components/TripDetails';
-
-import DriverImage from './Images/driver.jpg';
 import { Form, Input, Button } from "antd";
 import BookingConfirmation from "./BookingConfirmation";
-//import { locales } from "moment";
+
 
 const stylePaper = {
   height: '500px',
@@ -87,6 +84,10 @@ class BookCab extends Component {
           )
           .then(response => {
             console.log(response.data);
+            if (!Object.keys(response.data).length) {
+              alert("no buses found");
+            }
+
             this.setState({ res: response.data })
             this.setState({ res_received: true })
           })
@@ -105,7 +106,6 @@ class BookCab extends Component {
     let result = null
     if (this.state.res_received) {
       result = this.state.res_recieved;
-      console.log(this.state.res_recieved);
     }
     const res = (this.state.book === false && result !== null) ? <TripDetails trips={this.state.res} /> : null;
     const bookres = this.state.book === true ? <BookingConfirmation trips={this.state.bookDetails} /> : null;
@@ -169,6 +169,6 @@ class BookCab extends Component {
   }
 }
 
-const Book_cab = Form.create()(BookCab);
+const BookCabForm = Form.create()(BookCab);
 
-export default Book_cab;
+export default BookCabForm;

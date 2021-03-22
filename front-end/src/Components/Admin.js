@@ -4,7 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 import {Tabs, Tab} from 'material-ui/Tabs';
 
 const styleDiv = {
-  padding: '0px 127px',
+  padding: '0px 0px',
 };
 
 const styleToolbar = {
@@ -50,7 +50,8 @@ export default class Admin extends React.Component {
         <Toolbar style={styleToolbar}>
           <ToolbarGroup>
             <FlatButton 
-              label='UBER' 
+              label='Uber Bus Service' 
+              labelStyle={{ fontSize: 'larger' }}
               hoverColor='white'
               style= {styleUber}
               href="/"
@@ -62,7 +63,7 @@ export default class Admin extends React.Component {
               </Tab>
               <Tab label="Delete A Bus" style={StyleTab.TabLeft} href="/deleteBus">
               </Tab>
-              <Tab label="Your Rides" style={StyleTab.TabLeft} href="/yourRides">
+              <Tab label="View Bookings" style={StyleTab.TabLeft} href="/yourRides">
               </Tab>
             </Tabs> 
           </ToolbarGroup>

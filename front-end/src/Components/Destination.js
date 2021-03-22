@@ -1,60 +1,10 @@
-// import React from 'react';
-// import Paper from 'material-ui/Paper';
-// import Divider from 'material-ui/Divider';
-// import TextField from 'material-ui/TextField';
-
-// const stylePaper = {
-//   height: '200px',
-//   width: '375px',
-//   background: '#f8f8f9',
-//   position: 'fixed',
-//   marginLeft:'12px',
-// };
-
-// const style = {
-//   marginLeft: '20px',
-//   //width: '100px'
-// };
-
-// const styleDivText = {
-//   marginTop: '40px'
-// };
-
-// const styleButton = {
-//   marginTop:'4px',
-//   marginLeft: '20px',
-//   width: '340px',
-//   height: '30px',
-//   backgroundColor:'#216C55',
-//   color: 'white'
-// };
-
-// const PaperExampleSimple = () => (
-//     <div>
-//       <Paper zDepth={1} style={stylePaper}>
-//       <div style={styleDivText}>
-//       <form>
-//         <TextField hintText="Pick Up Location" style={style} underlineShow={false} name="pickUpLocation" />
-//         <Divider />
-//         <TextField hintText="Destination" style={style} underlineShow={false} name="destination"/>
-//         <button style={styleButton}>Book A Cab</button>
-//       </form>
-//     </div>
-//       </Paper>
-//     </div>
-//   );
-
-//   export default PaperExampleSimple;
-
 import React, { Component } from "react";
 import axios from "axios";
 import "antd/dist/antd.css";
 import "./Example.css";
 import Paper from 'material-ui/Paper';
-import Avatar from 'material-ui/Avatar';
-import DriverImage from './Images/driver.jpg';
 import { Form, Input, Button } from "antd";
-//import { locales } from "moment";
+
 
 const stylePaper = {
   height: '360px',

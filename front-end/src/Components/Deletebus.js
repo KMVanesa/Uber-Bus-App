@@ -24,6 +24,10 @@ const styleText = {
   fontWeight: '400'
 };
 
+function refreshPage() {
+  window.location.reload();
+}
+
 const FormItem = Form.Item;
 
 class DeleteBus extends Component {
@@ -56,7 +60,7 @@ class DeleteBus extends Component {
             this.setState({ res: response.data });
             this.setState({ res_received: true });
             alert("Bus Deleted Succesfully");
-
+            refreshPage();
 
           })
           .catch(error => {

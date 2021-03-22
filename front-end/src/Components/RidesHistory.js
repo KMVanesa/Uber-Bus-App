@@ -3,9 +3,7 @@ import axios from "axios";
 import "antd/dist/antd.css";
 import "./Example.css";
 import Paper from 'material-ui/Paper';
-import Avatar from 'material-ui/Avatar';
-import DriverImage from './Images/driver.jpg';
-import { Form, Input, Button } from "antd";
+import { Form } from "antd";
 import Table from "../Components/Table";
 
 

@@ -4,8 +4,8 @@ import "antd/dist/antd.css";
 import Paper from 'material-ui/Paper';
 import Avatar from 'material-ui/Avatar';
 import SignInImage from './Images/download.jpg';
-import { Form, Input, Button } from "antd";
-import { locales } from "moment";
+import { Form } from "antd";
+
 
 const stylePaper = {
   height: '230px',
@@ -25,7 +25,6 @@ const styleText = {
   fontWeight: '300'
 };
 
-
 class LogoutPage extends Component {
   state = {
     res: {},
@@ -41,9 +40,6 @@ class LogoutPage extends Component {
         this.setState({ res_received: true });
         localStorage.removeItem("loggedinuser")
         this.setState({ reload: true })
-        console.log(localStorage.getItem("loggedinuser"));
-        //if(this.state.reload)window.location.reload();
-        this.setState({ reload: false })
       })
       .catch(error => {
         alert("ERROR: Unable to logout!");
@@ -53,17 +49,12 @@ class LogoutPage extends Component {
   };
 
   render() {
-    // this.state.res_received 
-    // const result = localStorage.getItem("loggedinuser")!== "admin" ?
-    // <Home/> :
-    //null;
     return (
       <Paper style={stylePaper}>
-
         <div style={{ marginLeft: '0px', marginBottom: '40px' }}>
           <Avatar src={SignInImage} size='120px' />
           <div style={styleText}>
-            You have been Logged Out Succesfully
+            You have been Logged Out Successfully
               </div>
           {window.onload = function () {
             if (!window.location.hash) {

@@ -3,26 +3,9 @@ import axios from "axios";
 import "antd/dist/antd.css";
 import "./Example.css";
 import Paper from 'material-ui/Paper';
-import { Form, Input, Button } from "antd";
+import { Form } from "antd";
 import BusDetails from './../Components/BusDetails'
-//import { locales } from "moment";
 
-const stylePaper = {
-  height: '360px',
-  width: '375px',
-  background: '#f8f8f9',
-  position: 'relative',
-  marginLeft: '35%',
-  marginTop: '70px'
-};
-
-const styleText = {
-  marginLeft: '20px',
-  marginTop: '20px',
-  fontSize: '1.21429rem',
-  fontFamily: 'ff-clan-web-pro,"Helvetica Neue",Helvetica,sans-serif!important',
-  fontWeight: '400'
-};
 
 
 class GetBus extends Component {

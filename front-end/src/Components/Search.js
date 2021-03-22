@@ -9,7 +9,7 @@ import BookingDetails from './../Components/BookingDetails';
 
 
 const stylePaper = {
-  height: '330px',
+  height: '430px',
   width: '400px',
   background: '#f8f8f9',
   position: 'relative',
@@ -24,7 +24,9 @@ const styleText = {
   fontFamily: 'ff-clan-web-pro,"Helvetica Neue",Helvetica,sans-serif!important',
   fontWeight: '400'
 };
-
+function refreshPage() {
+  window.location.reload();
+}
 const FormItem = Form.Item;
 
 class Search extends Component {
@@ -62,6 +64,35 @@ class Search extends Component {
       }
     });
   };
+  
+  handleAlternate = e => {
+
+    e.preventDefault();
+    this.props.form.validateFields((err, fieldsValue) => {
+      if (!err) {
+        const values = {
+          ...fieldsValue,
+        };
+        let url = "http://54.83.37.177/trip/delete/" + values.username + "/" + values.bookingid;
+        console.log("Received values of form: ", values);
+        axios
+          .delete(url
+          )
+          .then(response => {
+            alert("Booking is cancelled ")
+            this.setState({ trip: {} });
+            this.setState({ res_received: true });
+            refreshPage();
+          })
+          .catch(error => {
+            alert("ERROR: Please check your User name/Booking id");
+            console.log(error);
+          });
+      }
+    });
+  };
+
+  
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -99,7 +130,16 @@ class Search extends Component {
               htmlType="submit"
               className="signup-form-button"
             >
-              SEARCH
+              Search Booking
+            </Button>
+          </FormItem>
+          <FormItem>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="signup-form-button"
+              onClick={this.handleAlternate.bind(this)}>
+              Delete Booking
             </Button>
           </FormItem>
           {res}

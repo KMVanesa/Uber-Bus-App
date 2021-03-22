@@ -8,9 +8,7 @@ const stylePaper = {
     marginTop: '90px',
     border: "1px solid black"
 }
-// table{
-//     border: "1px solid black";
-//   }
+
 const BookingDetails = ({ trips }) => {
     return (
       <table style={stylePaper}>

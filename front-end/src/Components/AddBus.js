@@ -6,7 +6,6 @@ import Paper from 'material-ui/Paper';
 import Avatar from 'material-ui/Avatar';
 import SignInImage from './Images/download.jpg';
 import { Form, Input, Button } from "antd";
-import { locales } from "moment";
 
 const stylePaper = {
   height: '640px',
@@ -26,7 +25,9 @@ const styleText = {
 };
 
 const FormItem = Form.Item;
-
+function refreshPage() {
+  window.location.reload();
+}
 class AddBus extends Component {
   state = {
     res: {},
@@ -41,7 +42,6 @@ class AddBus extends Component {
           ...fieldsValue,
           role: 'user'
         };
-        //delete values[""];
         console.log("Received values of form: ", values);
         axios
           .post("http://54.83.37.177/bus/new", {
@@ -60,6 +60,7 @@ class AddBus extends Component {
             if (response.data !== "permission denied") {
               this.setState({ res: response.data });
               this.setState({ res_received: true });
+              refreshPage();
             } else {
               alert("ERROR While Adding Bus!");
             }
@@ -119,7 +120,7 @@ class AddBus extends Component {
           <FormItem>
             {getFieldDecorator("duration", {
               rules: [
-                { required: true, message: "Please input Duraion!" }]
+                { required: true, message: "Please input Duration!" }]
             })(<Input type="text" placeholder="Duration" />)}
           </FormItem>
           <FormItem>

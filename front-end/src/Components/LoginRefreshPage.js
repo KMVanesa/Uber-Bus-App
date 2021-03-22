@@ -4,10 +4,7 @@ import "antd/dist/antd.css";
 import Paper from 'material-ui/Paper';
 import Avatar from 'material-ui/Avatar';
 import SignInImage from './Images/download.jpg';
-import HomePage from './../Components/HomePage'
 import { Form, Input, Button } from "antd";
-import { Redirect } from 'react-router'
-import { locales } from "moment";
 
 const stylePaper = {
   height: '330px',
@@ -21,7 +18,7 @@ const stylePaper = {
 const styleText = {
   marginLeft: '100px',
   marginTop: '-50px',
-  fontSize: '1.71429rem',
+  fontSize: '20px',
   fontFamily: 'ff-clan-web-pro,"Helvetica Neue",Helvetica,sans-serif!important',
   fontWeight: '400'
 };
@@ -53,7 +50,7 @@ class Signup extends Component {
             if (response.data === "Login Success") {
               this.setState({ res_received: true });
               localStorage.setItem("loggedinuser", values.firstname);
-              alert("Login Succesful");
+              alert("Login Success!");
             } else {
               alert("ERROR: Login Failed!");
             }
@@ -77,13 +74,13 @@ class Signup extends Component {
           <div style={{ marginLeft: '0px', marginBottom: '40px' }}>
             <Avatar src={SignInImage} size='80px' />
             <div style={styleText}>
-              Ride With Uber
+              Admin Login Only
               </div>
           </div>
           <FormItem>
             {getFieldDecorator("firstname", {
-              rules: [{ required: true, message: "Please input your First Name!" }]
-            })(<Input placeholder="First Name" />)}
+              rules: [{ required: true, message: "Please input User Name!" }]
+            })(<Input placeholder="User Name" />)}
           </FormItem>
           <FormItem>
             {getFieldDecorator("password", {

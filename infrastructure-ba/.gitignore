@@ -6,7 +6,7 @@
 # Local .terraform directories
 variables.tf
 **/.terraform/*
-krutarth.pem
+*.pem
 .terraform.*
 # .tfstate files
 *.tfstate

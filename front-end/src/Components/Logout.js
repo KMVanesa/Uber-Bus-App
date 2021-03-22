@@ -8,74 +8,75 @@ import { Form, Input, Button } from "antd";
 import { locales } from "moment";
 
 const stylePaper = {
-    height: '230px',
-    width: '400px',
-    background: '#f8f8f9',
-    position: 'relative',
-    marginLeft:'35%',
-    marginTop: '70px'
+  height: '230px',
+  width: '400px',
+  background: '#f8f8f9',
+  position: 'relative',
+  marginLeft: '35%',
+  marginTop: '70px'
 };
 
 const styleText = {
-    marginLeft: '50px',
-    marginTop: '10px',
-    marginRight: '50px',
-    fontSize: '1.5rem',
-    fontFamily: 'ff-clan-web-pro,"Helvetica Neue",Helvetica,sans-serif!important',
-    fontWeight: '300'
+  marginLeft: '50px',
+  marginTop: '10px',
+  marginRight: '50px',
+  fontSize: '1.5rem',
+  fontFamily: 'ff-clan-web-pro,"Helvetica Neue",Helvetica,sans-serif!important',
+  fontWeight: '300'
 };
 
 
 class LogoutPage extends Component {
   state = {
     res: {},
-    reload:false,
+    reload: false,
     res_received: false
   };
 
-  componentDidMount(){
-        axios
-          .get("http://54.205.209.4/admin/logout")
-          .then(response => {
-            console.log(response);
-            this.setState({ res_received: true });
-            localStorage.removeItem("loggedinuser")
-            this.setState({reload:true})
-            console.log(localStorage.getItem("loggedinuser"));
-            //if(this.state.reload)window.location.reload();
-            this.setState({reload:false})
-          })
-          .catch(error => {
-            alert("ERROR: Unable to logout!");
-            console.log(error);
-          });
-      
+  componentDidMount() {
+    axios
+      .get("http://54.83.37.177/admin/logout")
+      .then(response => {
+        console.log(response);
+        this.setState({ res_received: true });
+        localStorage.removeItem("loggedinuser")
+        this.setState({ reload: true })
+        console.log(localStorage.getItem("loggedinuser"));
+        //if(this.state.reload)window.location.reload();
+        this.setState({ reload: false })
+      })
+      .catch(error => {
+        alert("ERROR: Unable to logout!");
+        console.log(error);
+      });
+
   };
 
   render() {
-   // this.state.res_received 
+    // this.state.res_received 
     // const result = localStorage.getItem("loggedinuser")!== "admin" ?
     // <Home/> :
     //null;
     return (
       <Paper style={stylePaper}>
-        
-          <div style={{marginLeft:'0px', marginBottom: '40px'}}>
-              <Avatar src={SignInImage} size='120px'/>  
-              <div style={styleText}>
-                You have been Logged Out Succesfully
+
+        <div style={{ marginLeft: '0px', marginBottom: '40px' }}>
+          <Avatar src={SignInImage} size='120px' />
+          <div style={styleText}>
+            You have been Logged Out Succesfully
               </div>
-             { window.onload = function() {
-                  if(!window.location.hash) {
-                      window.location = window.location + '#loaded';
-                      window.location.reload();}
-                  }
-              }
-          </div>
-          
+          {window.onload = function () {
+            if (!window.location.hash) {
+              window.location = window.location + '#loaded';
+              window.location.reload();
+            }
+          }
+          }
+        </div>
+
       </Paper>
     );
-    
+
   }
 }
 

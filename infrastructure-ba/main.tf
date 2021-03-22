@@ -1,6 +1,6 @@
 resource "aws_eip_association" "eip_assoc" {
   instance_id   = aws_instance.back_end.id
-  allocation_id = "eipalloc-0378c6a05d4d9660e"
+  allocation_id = "eipalloc-07ecd7ecd20698827"
 }
 
 
@@ -8,14 +8,14 @@ resource "aws_eip_association" "eip_assoc" {
 resource "aws_instance" "back_end" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
-  key_name      = "krutarth"
+  key_name      = "dev"
   tags = {
     Name = "back_end"
   }
    connection {
     type        = "ssh"
     user        = "ubuntu"
-    private_key = file("krutarth.pem")
+    private_key = file("dev.pem")
     host =  self.public_ip
     timeout = "3m"
   } 
@@ -36,8 +36,6 @@ resource "aws_instance" "back_end" {
         source      = "wsgi.py"
         destination = "/home/ubuntu/wsgi.py"
     }
-    
-
     provisioner "remote-exec" {
         inline = [
             "chmod +x /home/ubuntu/script-be.sh",

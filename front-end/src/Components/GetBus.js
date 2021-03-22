@@ -13,16 +13,16 @@ const stylePaper = {
   width: '375px',
   background: '#f8f8f9',
   position: 'relative',
-  marginLeft:'35%',
+  marginLeft: '35%',
   marginTop: '70px'
 };
 
 const styleText = {
-    marginLeft: '20px',
-    marginTop: '20px',
-    fontSize: '1.21429rem',
-    fontFamily: 'ff-clan-web-pro,"Helvetica Neue",Helvetica,sans-serif!important',
-    fontWeight: '400'
+  marginLeft: '20px',
+  marginTop: '20px',
+  fontSize: '1.21429rem',
+  fontFamily: 'ff-clan-web-pro,"Helvetica Neue",Helvetica,sans-serif!important',
+  fontWeight: '400'
 };
 
 const FormItem = Form.Item;
@@ -39,19 +39,19 @@ class GetBus extends Component {
       if (!err) {
         const values = {
           ...fieldsValue,
-          role: 'driver'        
+          role: 'driver'
         };
         //delete values[""];
         console.log("Received values of form: ", values);
         axios
-          .post("http://54.205.209.4/trip/new", 
-          {
-            "bus": {
-              "start": this.state.start,
-              "end": this.state.end
-            },
-            "user": this.state.user
-          }
+          .post("http://54.83.37.177/trip/new",
+            {
+              "bus": {
+                "start": this.state.start,
+                "end": this.state.end
+              },
+              "user": this.state.user
+            }
           )
           .then(response => {
             console.log(response);
@@ -73,17 +73,17 @@ class GetBus extends Component {
       if (!err) {
         const values = {
           ...fieldsValue,
-          role: 'driver'        
+          role: 'driver'
         };
         //delete values[""];
         console.log("Received values of form: ", values);
         axios
-          .post("http://54.205.209.4/trip/search", 
-          {
+          .post("http://54.83.37.177/trip/search",
+            {
               "start": this.state.start,
               "end": this.state.end,
               "date": this.state.date
-          }
+            }
           )
           .then(response => {
             console.log(response);
@@ -109,11 +109,11 @@ class GetBus extends Component {
 
     return (
       <Paper style={stylePaper}>
-        
+
         <Form onSubmit={this.handleSubmit} className="signup-form">
-          <div style={{marginTop: '20px', marginBottom: '20px'}}> 
+          <div style={{ marginTop: '20px', marginBottom: '20px' }}>
             <div style={styleText}>
-              Look for the Buses: 
+              Look for the Buses:
             </div>
           </div>
           <FormItem>

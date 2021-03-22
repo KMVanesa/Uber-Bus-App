@@ -9,20 +9,20 @@ import { Form, Input, Button } from "antd";
 import { locales } from "moment";
 
 const stylePaper = {
-    height: '640px',
-    width: '400px',
-    background: '#f8f8f9',
-    position: 'relative',
-    marginLeft:'35%',
-    marginTop: '70px'
+  height: '640px',
+  width: '400px',
+  background: '#f8f8f9',
+  position: 'relative',
+  marginLeft: '35%',
+  marginTop: '70px'
 };
 
 const styleText = {
-    marginLeft: '100px',
-    marginTop: '-50px',
-    fontSize: '1.71429rem',
-    fontFamily: 'ff-clan-web-pro,"Helvetica Neue",Helvetica,sans-serif!important',
-    fontWeight: '400'
+  marginLeft: '100px',
+  marginTop: '-50px',
+  fontSize: '1.71429rem',
+  fontFamily: 'ff-clan-web-pro,"Helvetica Neue",Helvetica,sans-serif!important',
+  fontWeight: '400'
 };
 
 const FormItem = Form.Item;
@@ -39,29 +39,29 @@ class AddBus extends Component {
       if (!err) {
         const values = {
           ...fieldsValue,
-          role: 'user'        
+          role: 'user'
         };
         //delete values[""];
         console.log("Received values of form: ", values);
         axios
-          .post("http://54.205.209.4/bus/new", {
+          .post("http://54.83.37.177/bus/new", {
             "bus_id": values.busid,
             "start": values.start,
             "end": values.end,
             "date": values.date,
-            "duration":  values.duration,
-            "time":values.time,
-            "seats":values.seats
+            "duration": values.duration,
+            "time": values.time,
+            "seats": values.seats
 
-            }
+          }
           )
           .then(response => {
             console.log(response.data);
-            if(response.data!=="permission denied"){
-                this.setState({ res: response.data });
-                this.setState({ res_received: true });
-            }else{
-                alert("ERROR While Adding Bus!");
+            if (response.data !== "permission denied") {
+              this.setState({ res: response.data });
+              this.setState({ res_received: true });
+            } else {
+              alert("ERROR While Adding Bus!");
             }
           })
           .catch(error => {
@@ -82,12 +82,12 @@ class AddBus extends Component {
 
     return (
       <Paper style={stylePaper}>
-        
+
         <Form onSubmit={this.handleSubmit} className="signup-form">
-          <div style={{marginLeft:'0px', marginBottom: '40px'}}>
-              <Avatar src={SignInImage} size='80px' />  
-              <div style={styleText}>
-                Ride With Uber
+          <div style={{ marginLeft: '0px', marginBottom: '40px' }}>
+            <Avatar src={SignInImage} size='80px' />
+            <div style={styleText}>
+              Ride With Uber
               </div>
           </div>
           <FormItem>
@@ -113,28 +113,28 @@ class AddBus extends Component {
           <FormItem>
             {getFieldDecorator("date", {
               rules: [
-                { required: true, message: "Please input your Date!" }              ]
+                { required: true, message: "Please input your Date!" }]
             })(<Input type="text" placeholder="Date" />)}
           </FormItem>
           <FormItem>
             {getFieldDecorator("duration", {
               rules: [
-                { required: true, message: "Please input Duraion!" }              ]
+                { required: true, message: "Please input Duraion!" }]
             })(<Input type="text" placeholder="Duration" />)}
           </FormItem>
           <FormItem>
             {getFieldDecorator("time", {
               rules: [
-                { required: true, message: "Please input your Time!" }              ]
+                { required: true, message: "Please input your Time!" }]
             })(<Input type="text" placeholder="Time" />)}
           </FormItem>
           <FormItem>
             {getFieldDecorator("seats", {
               rules: [
-                { required: true, message: "Please input your Seats!" }              ]
+                { required: true, message: "Please input your Seats!" }]
             })(<Input type="text" placeholder="Seats" />)}
           </FormItem>
-        
+
           <FormItem>
             <Button
               type="primary"

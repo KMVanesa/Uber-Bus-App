@@ -16,16 +16,16 @@ const stylePaper = {
   width: '375px',
   background: '#f8f8f9',
   position: 'relative',
-  marginLeft:'35%',
+  marginLeft: '35%',
   marginTop: '70px'
 };
 
 const styleText = {
-    marginLeft: '20px',
-    marginTop: '20px',
-    fontSize: '1.21429rem',
-    fontFamily: 'ff-clan-web-pro,"Helvetica Neue",Helvetica,sans-serif!important',
-    fontWeight: '400'
+  marginLeft: '20px',
+  marginTop: '20px',
+  fontSize: '1.21429rem',
+  fontFamily: 'ff-clan-web-pro,"Helvetica Neue",Helvetica,sans-serif!important',
+  fontWeight: '400'
 };
 
 const FormItem = Form.Item;
@@ -33,9 +33,9 @@ const FormItem = Form.Item;
 class BookCab extends Component {
   state = {
     res: [],
-    bookDetails:[],
+    bookDetails: [],
     res_received: false,
-    book:false
+    book: false
   };
 
   handleSubmit = e => {
@@ -44,20 +44,20 @@ class BookCab extends Component {
       if (!err) {
         const values = {
           ...fieldsValue,
-          role: 'driver'        
+          role: 'driver'
         };
         console.log("Received values of form: ", values);
         axios
-          .post("http://54.205.209.4/trip/new", 
-          {
-            "user": values.username,
-            "bus": values.bus
-          }
+          .post("http://54.83.37.177/trip/new",
+            {
+              "user": values.username,
+              "bus": values.bus
+            }
           )
           .then(response => {
             console.log(response.data);
-            this.setState({book:true})
-            this.setState({bookDetails:response.data})
+            this.setState({ book: true })
+            this.setState({ bookDetails: response.data })
             alert('Your Bus is on its way.')
           })
           .catch(error => {
@@ -74,21 +74,21 @@ class BookCab extends Component {
       if (!err) {
         const values = {
           ...fieldsValue,
-          role: 'driver'        
+          role: 'driver'
         };
         console.log("Received values of form: ", values);
         axios
-          .post("http://54.205.209.4/trip/search", 
-          {
+          .post("http://54.83.37.177/trip/search",
+            {
               "start": values.start,
               "end": values.end,
               "date": values.date
-          }
+            }
           )
           .then(response => {
             console.log(response.data);
-            this.setState({res:response.data})
-            this.setState({res_received:true})
+            this.setState({ res: response.data })
+            this.setState({ res_received: true })
           })
           .catch(error => {
             alert("ERROR: No Buses Found!")
@@ -102,20 +102,20 @@ class BookCab extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    let result=null
+    let result = null
     if (this.state.res_received) {
       result = this.state.res_recieved;
       console.log(this.state.res_recieved);
     }
-    const res = (this.state.book===false&&result!==null)?<TripDetails trips={this.state.res}/>:null;
-    const bookres = this.state.book===true?<BookingConfirmation trips={this.state.bookDetails}/>:null;
+    const res = (this.state.book === false && result !== null) ? <TripDetails trips={this.state.res} /> : null;
+    const bookres = this.state.book === true ? <BookingConfirmation trips={this.state.bookDetails} /> : null;
     return (
       <Paper style={stylePaper}>
-        
+
         <Form onSubmit={this.handleSubmit} className="signup-form">
-          <div style={{marginTop: '20px', marginBottom: '20px'}}> 
+          <div style={{ marginTop: '20px', marginBottom: '20px' }}>
             <div style={styleText}>
-              Look for the Buses: 
+              Look for the Buses:
             </div>
           </div>
           <FormItem>
@@ -140,7 +140,7 @@ class BookCab extends Component {
           </FormItem>
           <FormItem>
             {getFieldDecorator("bus", {
-              rules: [{  message: "Please input your Bus id" }]
+              rules: [{ message: "Please input your Bus id" }]
             })(<Input placeholder="Bus id" />)}
           </FormItem>
           <FormItem>

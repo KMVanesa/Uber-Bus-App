@@ -9,28 +9,28 @@ import BookingDetails from './../Components/BookingDetails';
 
 
 const stylePaper = {
-    height: '330px',
-    width: '400px',
-    background: '#f8f8f9',
-    position: 'relative',
-    marginLeft:'35%',
-    marginTop: '70px'
+  height: '330px',
+  width: '400px',
+  background: '#f8f8f9',
+  position: 'relative',
+  marginLeft: '35%',
+  marginTop: '70px'
 };
 
 const styleText = {
-    marginLeft: '100px',
-    marginTop: '-50px',
-    fontSize: '1.71429rem',
-    fontFamily: 'ff-clan-web-pro,"Helvetica Neue",Helvetica,sans-serif!important',
-    fontWeight: '400'
+  marginLeft: '100px',
+  marginTop: '-50px',
+  fontSize: '1.71429rem',
+  fontFamily: 'ff-clan-web-pro,"Helvetica Neue",Helvetica,sans-serif!important',
+  fontWeight: '400'
 };
 
 const FormItem = Form.Item;
 
 class Search extends Component {
   state = {
-    "trip":{},
-    "res_received":false
+    "trip": {},
+    "res_received": false
   };
 
   handleSubmit = e => {
@@ -39,19 +39,19 @@ class Search extends Component {
     this.props.form.validateFields((err, fieldsValue) => {
       if (!err) {
         const values = {
-          ...fieldsValue,        
+          ...fieldsValue,
         };
         console.log("Received values of form: ", values);
         axios
-          .post("http://54.205.209.4/trip/booking", 
-              {
-                  "user": values.username,
-                  "trip_id": values.bookingid
-              }
+          .post("http://54.83.37.177/trip/booking",
+            {
+              "user": values.username,
+              "trip_id": values.bookingid
+            }
           )
           .then(response => {
             console.log(response.data);
-            localStorage.setItem('AuthToken' ,response.data.auth_token)
+            localStorage.setItem('AuthToken', response.data.auth_token)
             this.setState({ trip: response.data });
             this.setState({ res_received: true });
           })
@@ -70,15 +70,15 @@ class Search extends Component {
       result = this.state.res_recieved;
       console.log(this.state.res_recieved);
     }
-    const res = result!==null?<BookingDetails trips={this.state.trip}/>:null;
+    const res = result !== null ? <BookingDetails trips={this.state.trip} /> : null;
     return (
       <Paper style={stylePaper}>
-        
+
         <Form onSubmit={this.handleSubmit} className="signup-form">
-          <div style={{marginLeft:'0px', marginBottom: '40px'}}>
-              <Avatar src={SignInImage} size='80px' />  
-              <div style={styleText}>
-                Search your Bookings
+          <div style={{ marginLeft: '0px', marginBottom: '40px' }}>
+            <Avatar src={SignInImage} size='80px' />
+            <div style={styleText}>
+              Search your Bookings
               </div>
           </div>
           <FormItem>

@@ -9,20 +9,20 @@ import { Form, Input, Button } from "antd";
 import { locales } from "moment";
 
 const stylePaper = {
-    height: '440px',
-    width: '400px',
-    background: '#f8f8f9',
-    position: 'relative',
-    marginLeft:'35%',
-    marginTop: '70px'
+  height: '440px',
+  width: '400px',
+  background: '#f8f8f9',
+  position: 'relative',
+  marginLeft: '35%',
+  marginTop: '70px'
 };
 
 const styleText = {
-    marginLeft: '100px',
-    marginTop: '-50px',
-    fontSize: '1.71429rem',
-    fontFamily: 'ff-clan-web-pro,"Helvetica Neue",Helvetica,sans-serif!important',
-    fontWeight: '400'
+  marginLeft: '100px',
+  marginTop: '-50px',
+  fontSize: '1.71429rem',
+  fontFamily: 'ff-clan-web-pro,"Helvetica Neue",Helvetica,sans-serif!important',
+  fontWeight: '400'
 };
 
 const FormItem = Form.Item;
@@ -39,12 +39,12 @@ class Signup extends Component {
       if (!err) {
         const values = {
           ...fieldsValue,
-          role: 'user'        
+          role: 'user'
         };
         //delete values[""];
         console.log("Received values of form: ", values);
         axios
-          .post("http://54.205.209.4/signup", {
+          .post("http://54.83.37.177/signup", {
             // "user" : {
             //   "provider" : "username",
             //   "data": {
@@ -56,17 +56,17 @@ class Signup extends Component {
             // "firstname": values.firstname,
             // "lastname":  values.lastname
 
-                "username": values.firstname,
-                "password": values.password,
+            "username": values.firstname,
+            "password": values.password,
             "role": values.role,
             "firstname": values.firstname,
-            "lastname":  values.lastname
+            "lastname": values.lastname
 
-            }
+          }
           )
           .then(response => {
             console.log(response);
-            localStorage.setItem('AuthToken' ,response.data.auth_token)
+            localStorage.setItem('AuthToken', response.data.auth_token)
             this.setState({ res: response.data });
             this.setState({ res_received: true });
             alert("Login Succesfull");
@@ -89,12 +89,12 @@ class Signup extends Component {
 
     return (
       <Paper style={stylePaper}>
-        
+
         <Form onSubmit={this.handleSubmit} className="signup-form">
-          <div style={{marginLeft:'0px', marginBottom: '40px'}}>
-              <Avatar src={SignInImage} size='80px' />  
-              <div style={styleText}>
-                Ride With Uber
+          <div style={{ marginLeft: '0px', marginBottom: '40px' }}>
+            <Avatar src={SignInImage} size='80px' />
+            <div style={styleText}>
+              Ride With Uber
               </div>
           </div>
           <FormItem>
@@ -129,7 +129,7 @@ class Signup extends Component {
               ]
             })(<Input type="password" placeholder="Password" />)}
           </FormItem>
-        
+
           <FormItem>
             <Button
               type="primary"

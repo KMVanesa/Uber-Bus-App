@@ -61,16 +61,16 @@ const stylePaper = {
   width: '375px',
   background: '#f8f8f9',
   position: 'relative',
-  marginLeft:'35%',
+  marginLeft: '35%',
   marginTop: '70px'
 };
 
 const styleText = {
-    marginLeft: '20px',
-    marginTop: '20px',
-    fontSize: '1.21429rem',
-    fontFamily: 'ff-clan-web-pro,"Helvetica Neue",Helvetica,sans-serif!important',
-    fontWeight: '400'
+  marginLeft: '20px',
+  marginTop: '20px',
+  fontSize: '1.21429rem',
+  fontFamily: 'ff-clan-web-pro,"Helvetica Neue",Helvetica,sans-serif!important',
+  fontWeight: '400'
 };
 
 const FormItem = Form.Item;
@@ -87,7 +87,7 @@ class Signup extends Component {
       if (!err) {
         const values = {
           ...fieldsValue,
-          role: 'driver'        
+          role: 'driver'
         };
         console.log("Received values of form: ", values);
         localStorage.setItem('latitude', values.latitude);
@@ -95,10 +95,10 @@ class Signup extends Component {
         const x = localStorage.getItem('latitude');
         const y = localStorage.getItem('longitude');
         axios
-          .get("http://54.205.209.4/trip/all")
+          .get("http://54.83.37.177/trip/all")
           .then(response => {
             console.log(response);
-            localStorage.setItem('rides' ,response.data.auth_token)
+            localStorage.setItem('rides', response.data.auth_token)
             this.setState({ res: response.data });
             this.setState({ res_received: true });
             alert('Your Cab is on its way.')
@@ -121,11 +121,11 @@ class Signup extends Component {
 
     return (
       <Paper style={stylePaper}>
-        
+
         <Form onSubmit={this.handleSubmit} className="signup-form">
-          <div style={{marginTop: '20px', marginBottom: '20px'}}> 
+          <div style={{ marginTop: '20px', marginBottom: '20px' }}>
             <div style={styleText}>
-              Look For the Cabs Near you 
+              Look For the Cabs Near you
             </div>
           </div>
           <FormItem>

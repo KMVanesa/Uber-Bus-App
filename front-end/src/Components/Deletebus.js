@@ -8,20 +8,20 @@ import { Form, Input, Button } from "antd";
 
 
 const stylePaper = {
-    height: '330px',
-    width: '400px',
-    background: '#f8f8f9',
-    position: 'relative',
-    marginLeft:'35%',
-    marginTop: '70px'
+  height: '330px',
+  width: '400px',
+  background: '#f8f8f9',
+  position: 'relative',
+  marginLeft: '35%',
+  marginTop: '70px'
 };
 
 const styleText = {
-    marginLeft: '100px',
-    marginTop: '-50px',
-    fontSize: '1.71429rem',
-    fontFamily: 'ff-clan-web-pro,"Helvetica Neue",Helvetica,sans-serif!important',
-    fontWeight: '400'
+  marginLeft: '100px',
+  marginTop: '-50px',
+  fontSize: '1.71429rem',
+  fontFamily: 'ff-clan-web-pro,"Helvetica Neue",Helvetica,sans-serif!important',
+  fontWeight: '400'
 };
 
 const FormItem = Form.Item;
@@ -30,12 +30,12 @@ class DeleteBus extends Component {
   state = {
     "username": "",
     "id": "",
-    "start":"",
-    "end":"",
-    "duration":"",
-    "seats":"",
-    "date":"",
-    "time":""
+    "start": "",
+    "end": "",
+    "duration": "",
+    "seats": "",
+    "date": "",
+    "time": ""
   };
 
   handleSubmit = e => {
@@ -44,20 +44,20 @@ class DeleteBus extends Component {
     this.props.form.validateFields((err, fieldsValue) => {
       if (!err) {
         const values = {
-          ...fieldsValue,        
+          ...fieldsValue,
         };
         console.log("Received values of form: ", values);
         axios
-          .delete("http://54.205.209.4/bus/delete/"+values.busid
-              
+          .delete("http://54.83.37.177/bus/delete/" + values.busid
+
           )
           .then(response => {
             console.log(response);
-                this.setState({ res: response.data });
-                this.setState({ res_received: true });
-                alert("Bus Deleted Succesfully");
+            this.setState({ res: response.data });
+            this.setState({ res_received: true });
+            alert("Bus Deleted Succesfully");
 
-            
+
           })
           .catch(error => {
             alert("ERROR: Please check your User Bus id");
@@ -68,16 +68,16 @@ class DeleteBus extends Component {
   };
 
   render() {
-    const { getFieldDecorator } = this.props.form;   
-   
+    const { getFieldDecorator } = this.props.form;
+
     return (
       <Paper style={stylePaper}>
-        
+
         <Form onSubmit={this.handleSubmit} className="signup-form">
-          <div style={{marginLeft:'0px', marginBottom: '40px'}}>
-              <Avatar src={SignInImage} size='80px' />  
-              <div style={styleText}>
-                Delete your Bus
+          <div style={{ marginLeft: '0px', marginBottom: '40px' }}>
+            <Avatar src={SignInImage} size='80px' />
+            <div style={styleText}>
+              Delete your Bus
               </div>
           </div>
           <FormItem>
@@ -85,7 +85,7 @@ class DeleteBus extends Component {
               rules: [{ required: true, message: "Please input your Busid!" }]
             })(<Input placeholder="Busid" />)}
           </FormItem>
-          
+
           <FormItem>
             <Button
               type="primary"

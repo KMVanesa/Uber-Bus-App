@@ -1,19 +1,19 @@
 resource "aws_eip_association" "eip_assoc-fe" {
   instance_id   = aws_instance.front_end.id
-  allocation_id = "eipalloc-0f679eef584322357"
+  allocation_id = "eipalloc-0703fb477e9f43b7a"
 }
 
 resource "aws_instance" "front_end" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
-  key_name      = "krutarth"
+  key_name      = "dev"
   tags = {
     Name = "front_end"
   }
    connection {
     type        = "ssh"
     user        = "ubuntu"
-    private_key = file("krutarth.pem")
+    private_key = file("dev.pem")
     host =  self.public_ip
     timeout = "3m"
   } 

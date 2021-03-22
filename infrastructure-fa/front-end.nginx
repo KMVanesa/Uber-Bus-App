@@ -1,0 +1,12 @@
+server {
+    listen 80;
+    listen [::]:80;
+    root /home/ubuntu/Uber-Bus-App/front-end/build;
+    index index.html;
+    try_files $uri $uri/ /index.html;
+    access_log  /var/log/nginx/back-end.access.log;
+    error_log   /var/log/nginx/back-end.error.log;
+    location /{
+        try_files $uri $uri/ /index.html;
+    }
+}

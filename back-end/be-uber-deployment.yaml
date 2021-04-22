@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: be-uber
+spec:
+  selector:
+    matchLabels:
+      app: be-uber
+  replicas: 3
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: be-uber
+    spec:
+      containers:
+        - image: vkrutarth/uber-be:latest
+          imagePullPolicy: Always
+          name: be-uber
+          ports:
+            - containerPort: 5000

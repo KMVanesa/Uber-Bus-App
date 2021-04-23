@@ -42,14 +42,10 @@ jobs:
       - run:
           name: Configuring Kubectl
           command: |
-            pwd
-            # ls -al /home/circleci/.kube/
-            echo "########"
-            ls -al /home/circleci/
             cp config-map-aws-auth.yml /tmp/config-map-aws-auth.yml
-            cp config-terraform-eks ~/.kube/config-terraform-eks
-            aws eks update-kubeconfig --name terraform-eks-demo-kmv
-            export KUBECONFIG=~/.kube/config-terraform-eks:/.kube/config
+            # cp config-terraform-eks ~/.kube/config-terraform-eks
+            aws eks update-kubeconfig --kubeconfig config-terraform-eks --name terraform-eks-demo-kmv
+            # export KUBECONFIG=~/.kube/config-terraform-eks:/.kube/config
             kubectl apply -f /tmp/config-map-aws-auth.yml
             cd back-end/
             kubectl apply -f be-uber-deployment.yaml

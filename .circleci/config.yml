@@ -42,11 +42,12 @@ jobs:
       - run:
           name: Configuring Kubectl
           command: |
-            cp config-map-aws-auth.yml /tmp/config-map-aws-auth.yml
+            # cp config-map-aws-auth.yml /tmp/config-map-aws-auth.yml
             # cp config-terraform-eks ~/.kube/config-terraform-eks
-            aws eks update-kubeconfig --kubeconfig config-terraform-eks --name terraform-eks-demo-kmv
+            # aws eks update-kubeconfig --kubeconfig config-terraform-eks --name terraform-eks-demo-kmv
+            aws eks update-kubeconfig --name terraform-eks-demo-kmv
             # export KUBECONFIG=~/.kube/config-terraform-eks:/.kube/config
-            kubectl apply -f /tmp/config-map-aws-auth.yml
+            kubectl apply -f config-map-aws-auth.yml
             cd back-end/
             kubectl apply -f be-uber-deployment.yaml
             kubectl apply -f be-uber-service.yaml

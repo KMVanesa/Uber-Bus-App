@@ -43,7 +43,7 @@ jobs:
           name: Configuring Kubectl
           command: |
             cd ~
-            cp config_map_aws_auth.yml /tmp/config-map-aws-auth.yml
+            cp config-map-aws-auth.yml /tmp/config-map-aws-auth.yml
             cp config-terraform-eks ~/.kube/config-terraform-eks
             aws eks update-kubeconfig --name terraform-eks-demo-kmv
             export KUBECONFIG=~/.kube/config-terraform-eks:/.kube/config

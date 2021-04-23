@@ -121,7 +121,7 @@ def all_buses():
             buses = list(db["trips"]["buses"].find())
             return json.dumps(buses, cls=DateTimeEncoder)
     else:
-        return jsonify("Auth Failed: No JWT Token Found"), status.HTTP_401_UNAUTHORIZED
+        return jsonify("Authenticaton Failed: No JWT Token Found"), status.HTTP_401_UNAUTHORIZED
 
 
 # !Delete Bus

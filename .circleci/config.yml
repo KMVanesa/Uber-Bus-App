@@ -48,7 +48,7 @@ jobs:
             aws eks update-kubeconfig --name terraform-eks-demo-kmv --region us-east-1 --role-arn arn:aws:iam::254747811220:user/circle-ci
             # aws eks update-kubeconfig --name terraform-eks-demo-kmv
             # export KUBECONFIG=~/.kube/config-terraform-eks:/.kube/config
-            # kubectl apply -f config-map-aws-auth.yml
+            kubectl apply -f config-map-aws-auth.yml
             # cd back-end/
             # kubectl apply -f be-uber-deployment.yaml
             # kubectl apply -f be-uber-service.yaml

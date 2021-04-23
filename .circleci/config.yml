@@ -22,4 +22,4 @@ jobs:
             cd back-end/
             docker login -u $DNAME -p $DPASS
             docker build -t vkrutarth/uber-be .
-            docker push vkrutarth/uber-be:circleci
+            docker push vkrutarth/uber-be:latest

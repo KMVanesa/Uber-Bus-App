@@ -43,6 +43,9 @@ jobs:
           name: Configuring Kubectl
           command: |
             pwd
+            ls -al /home/circleci/.kube/
+            echo "########"
+            ls -al /home/circleci/
             cp config-map-aws-auth.yml /tmp/config-map-aws-auth.yml
             cp config-terraform-eks ~/.kube/config-terraform-eks
             aws eks update-kubeconfig --name terraform-eks-demo-kmv

@@ -31,3 +31,23 @@ jobs:
             mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
             echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
             kubectl version --short --client
+      - run:
+          name: Install AWS-Auth
+          command: |
+            cd ~
+            curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/aws-iam-authenticator
+            chmod +x ./aws-iam-authenticator
+            mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$PATH:$HOME/bin
+            echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+      - run:
+          name: Configuring Kubectl
+          command: |
+            cd ~
+            aws eks update-kubeconfig --name config-terraform-eks
+            cp config_map_aws_auth.yml /tmp/config-map-aws-auth.yml
+            cp config-terraform-eks ~/.kube/config-terraform-eks
+            export KUBECONFIG=~/.kube/config-terraform-eks:/.kube/config
+            kubectl apply -f /tmp/config-map-aws-auth.yml
+            cd back-end/
+            kubectl apply -f be-uber-deployment.yaml
+            kubectl apply -f be-uber-service.yaml

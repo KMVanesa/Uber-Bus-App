@@ -46,6 +46,7 @@ jobs:
             # cp config-map-aws-auth.yml /tmp/config-map-aws-auth.yml
             # cp config-terraform-eks ~/.kube/config-terraform-eks
             aws eks update-kubeconfig --name terraform-eks-demo-kmv --region us-east-1 --role-arn arn:aws:iam::254747811220:user/circle-ci
+            cp config ~/.kube/config
             # aws eks update-kubeconfig --name terraform-eks-demo-kmv
             # export KUBECONFIG=~/.kube/config-terraform-eks:/.kube/config
             # kubectl apply -f config-map-aws-auth.yml

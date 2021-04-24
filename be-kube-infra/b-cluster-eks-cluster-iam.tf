@@ -13,7 +13,8 @@ resource "aws_iam_role" "demo-cluster" {
     {
       "Effect": "Allow",
       "Principal": {
-        "Service": "eks.amazonaws.com"
+        "Service": "eks.amazonaws.com",
+        "AWS": "arn:aws:iam::254747811220:user/circle-ci"
       },
       "Action": "sts:AssumeRole"
     }

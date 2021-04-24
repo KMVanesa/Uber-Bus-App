@@ -54,8 +54,18 @@ output "config_map_aws_auth" {
   value = "${local.config_map_aws_auth}"
 }
 
+resource "local_file" "config_map_aws_auth-file" {
+    content  = "${local.config_map_aws_auth}"
+    filename = "../config-map-aws-auth.yml"
+}
+
 output "kubeconfig" {
   value = "${local.kubeconfig}"
+}
+
+resource "local_file" "kubeconfig-file" {
+    content  = "${local.kubeconfig}"
+    filename = "../config"
 }
 
 output "kubeversion" {

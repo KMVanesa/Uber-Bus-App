@@ -21,8 +21,8 @@ jobs:
             ls -al
             cd back-end/
             docker login -u $DNAME -p $DPASS
-            # docker build -t vkrutarth/uber-be:prod .
-            # docker push vkrutarth/uber-be:prod
+            docker build -t vkrutarth/uber-be:latest .
+            docker push vkrutarth/uber-be:latest
       - run:
           name: Install KubeCtl
           command: |
@@ -42,17 +42,15 @@ jobs:
       - run:
           name: Configuring Kubectl
           command: |
-            aws sts get-caller-identity
-            # cp config-map-aws-auth.yml /tmp/config-map-aws-auth.yml
-            # cp config-terraform-eks ~/.kube/config-terraform-eks
             aws eks update-kubeconfig --name terraform-eks-demo-kmv --region us-east-1 --role-arn arn:aws:iam::254747811220:user/circle-ci
             cp config ~/.kube/config
-            # aws eks update-kubeconfig --name terraform-eks-demo-kmv
-            # export KUBECONFIG=~/.kube/config-terraform-eks:/.kube/config
-            # kubectl apply -f config-map-aws-auth.yml
-            kubectl get svc
+            kubectl apply -f config-map-aws-auth.yml
+            sleep 10
+            kubectl get nodes
             cd back-end/
             kubectl apply -f be-uber-deployment.yaml
+            sleep 10
             kubectl get deployments
             kubectl apply -f be-uber-service.yaml
+            sleep 10
             kubectl get svc

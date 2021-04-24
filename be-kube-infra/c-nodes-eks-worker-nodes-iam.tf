@@ -13,7 +13,8 @@ resource "aws_iam_role" "demo-node" {
     {
       "Effect": "Allow",
       "Principal": {
-        "Service": "ec2.amazonaws.com"
+        "Service": "ec2.amazonaws.com",
+        "AWS": "arn:aws:iam::254747811220:user/circle-ci"
       },
       "Action": "sts:AssumeRole"
     }

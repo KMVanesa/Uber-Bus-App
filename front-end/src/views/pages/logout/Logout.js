@@ -58,7 +58,7 @@ class Logout extends React.Component{
         console.log(localStorage.getItem("loggedinuser"));
         this.logout()
         if(this.state.res_received)
-            window.location = window.location.reload();
+            window.location.pathname = "/dashboard";
       })
       .catch(error => {
         alert("ERROR: Unable to logout!");

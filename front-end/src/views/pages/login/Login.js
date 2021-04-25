@@ -62,7 +62,7 @@ class Login extends React.Component {
   handleSubmit = e => {
 
     e.preventDefault();
-    let api_url = process.env.REACT_APP_URL ;
+    let api_url = `${process.env.REACT_APP_URL}` ;
     alert(api_url)
     if(api_url){
       alert("yes")
@@ -87,7 +87,7 @@ class Login extends React.Component {
           });
           console.log(window.location)
           if (window.location.pathname.toLowerCase() == "/login") {
-            window.location = window.location.reload();
+            window.location.pathname = "/dashboard";
           }
         } else {
           alert("ERROR: Login Failed!");
@@ -141,7 +141,7 @@ class Login extends React.Component {
                             <CButton color="primary" className="px-4" onClick={this.handleSubmit}>Login</CButton>
                           </CCol>
                           <CCol xs="6" className="text-right">
-                            <CButton color="link" className="px-0" onClick={() => window.location.pathname = "/"}>Go to Home?</CButton>
+                            <CButton color="link" className="px-0" onClick={() => window.location.pathname = "/dashboard"}>Go to Home?</CButton>
                           </CCol>
                         </CRow>
                       </CForm>

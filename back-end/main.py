@@ -15,9 +15,12 @@ from flask_api import status
 app = Flask(__name__)
 CORS(app)
 app.secret_key = "secrets"
+# db = MongoClient(
+#     "mongodb+srv://vkrutarth:Kmvanesa@trips.ugkzb.mongodb.net/trips?retryWrites=true&w=majority",ssl=True,ssl_cert_reqs='CERT_NONE'
+# )
+
 db = MongoClient(
-    "mongodb+srv://vkrutarth:Kmvanesa@trips.ugkzb.mongodb.net/trips?retryWrites=true&w=majority",ssl=True,ssl_cert_reqs='CERT_NONE'
-)
+    "mongodb+srv://krutarth:kmvanesa@rides.9gve0.mongodb.net/trips?authSource=admin&retryWrites=true&w=majority")
 secret_key = "devops2021"
 
 class DateTimeEncoder(json.JSONEncoder):
@@ -119,7 +122,7 @@ def all_buses():
             return jsonify("Auth Failed: InValid or Expired JWT token"), status.HTTP_401_UNAUTHORIZED
         else:
             buses = list(db["trips"]["buses"].find())
-            return json.dumps(buses, cls=DateTimeEncoder)
+            return json.dumps(buses, cls=DateTimeEncoder), status.HTTP_200_OK
     else:
         return jsonify("Authenticaton Failed: No JWT Token Found"), status.HTTP_401_UNAUTHORIZED
 

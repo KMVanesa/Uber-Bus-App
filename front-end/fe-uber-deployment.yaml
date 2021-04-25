@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fe-uber
+spec:
+  selector:
+    matchLabels:
+      app: fe-uber
+  replicas: 3
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: fe-uber
+    spec:
+      containers:
+        - image: vkrutarth/uber-fe:latest
+          imagePullPolicy: Always
+          name: fe-uber
+          env:
+            - name: REACT_APP_URL
+              value: "http://be-uber"
+          ports:
+            - containerPort: 80

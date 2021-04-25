@@ -13,16 +13,6 @@ jobs:
             sudo ./aws/install
             sudo apt-get update -y
             sudo apt-get install -y less   
-      - setup_remote_docker:
-          version: 19.03.13       
-      - run:
-          name: Docker Image Push
-          command: |
-            ls -al
-            cd back-end/
-            docker login -u $DNAME -p $DPASS
-            docker build -t vkrutarth/uber-be:latest .
-            docker push vkrutarth/uber-be:latest
       - run:
           name: Install KubeCtl
           command: |
@@ -39,6 +29,26 @@ jobs:
             chmod +x ./aws-iam-authenticator
             mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$PATH:$HOME/bin
             echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+      - setup_remote_docker:
+          version: 19.03.13 
+      - run:
+          name: Docker Image Push Back-End
+          command: |
+            ls -al
+            cd back-end/
+            docker login -u $DNAME -p $DPASS
+            docker build -t vkrutarth/uber-be:latest .
+            docker push vkrutarth/uber-be:latest
+            sleep 10
+      - run:
+          name: Docker Image Push Front-End
+          command: |
+            ls -al
+            cd front-end/
+            docker login -u $DNAME -p $DPASS
+            docker build -t vkrutarth/uber-fe:latest .
+            docker push vkrutarth/uber-fe:latest
+            sleep 10
       - run:
           name: Configuring Kubectl
           command: |
@@ -46,11 +56,24 @@ jobs:
             cp config ~/.kube/config
             kubectl apply -f config-map-aws-auth.yml
             sleep 10
-            kubectl get nodes
+            kubectl get nodes      
+      - run:
+          name: Deploying Back-end Pods
+          command: |
             cd back-end/
             kubectl apply -f be-uber-deployment.yaml
             sleep 10
             kubectl get deployments
             kubectl apply -f be-uber-service.yaml
+            sleep 10
+            kubectl get svc
+      - run:
+          name: Deploying Front-end Pods
+          command: |
+            cd front-end/
+            kubectl apply -f fe-uber-deployment.yaml
+            sleep 10
+            kubectl get deployments
+            kubectl apply -f fe-uber-service.yaml
             sleep 10
             kubectl get svc

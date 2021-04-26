@@ -24,6 +24,6 @@ spec:
           name: fe-uber
           env:
             - name: REACT_APP_URL
-              value: "http://be-uber"
+              value: $REACT_APP_URL
           ports:
             - containerPort: 80

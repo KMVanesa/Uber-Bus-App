@@ -41,15 +41,6 @@ jobs:
             docker push vkrutarth/uber-be:latest
             sleep 10
       - run:
-          name: Docker Image Push Front-End
-          command: |
-            ls -al
-            cd front-end/
-            docker login -u $DNAME -p $DPASS
-            docker build -t vkrutarth/uber-fe:latest .
-            docker push vkrutarth/uber-fe:latest
-            sleep 10
-      - run:
           name: Configuring Kubectl
           command: |
             aws eks update-kubeconfig --name terraform-eks-demo-kmv --region us-east-1 --role-arn arn:aws:iam::254747811220:user/circle-ci
@@ -67,6 +58,17 @@ jobs:
             kubectl apply -f be-uber-service.yaml
             sleep 10
             kubectl get svc
+            sleep 20
+      - run:
+          name: Docker Image Push Front-End
+          command: |
+            ls -al
+            cd front-end/
+            docker login -u $DNAME -p $DPASS
+            REACT_APP_URL=http://`kubectl get service/be-uber -o jsonpath={.status.loadBalancer.ingress..hostname}`
+            docker build --build-arg REACT_APP_URL=$REACT_APP_URL -t vkrutarth/uber-fe:latest .
+            docker push vkrutarth/uber-fe:latest
+            sleep 10
       - run:
           name: Deploying Front-end Pods
           command: |

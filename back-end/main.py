@@ -126,6 +126,14 @@ def all_buses():
     else:
         return jsonify("Authenticaton Failed: No JWT Token Found"), status.HTTP_401_UNAUTHORIZED
 
+# !Get Single Bus
+
+
+@app.route("/bus/<bus_id>", methods=["GET"])
+def get_bus(bus_id):
+    bus=list(db["trips"]["buses"].find({"_id": bus_id}))
+    return json.dumps(bus, cls=DateTimeEncoder)
+
 
 # !Delete Bus
 @app.route("/bus/delete/<bus_id>", methods=["DELETE"])

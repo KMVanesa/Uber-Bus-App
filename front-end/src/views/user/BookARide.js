@@ -127,7 +127,7 @@ class BookARide extends React.Component{
                         </CInputGroup>
                         <CRow>
                         <CCol xs="6">
-                            <CButton color="primary" className="px-4" onClick={this.handleSubmit}>Book A Cab</CButton>
+                            <CButton color="primary" className="px-4" onClick={this.handleSubmit}>Book Bus</CButton>
                             {this.state.book==true?
                         <CCardText className="text-danger">Please Enter Valid Values</CCardText>
                         :null}

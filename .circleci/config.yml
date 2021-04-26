@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.8.3
+      - image: circleci/node:13
     steps:
       - checkout
       - run:
@@ -64,6 +64,8 @@ jobs:
           command: |
             ls -al
             cd front-end/
+            npm install
+            CI=true npm test
             docker login -u $DNAME -p $DPASS
             REACT_APP_URL=http://`kubectl get service/be-uber -o jsonpath={.status.loadBalancer.ingress..hostname}`
             docker build --build-arg REACT_APP_URL=$REACT_APP_URL -t vkrutarth/uber-fe:latest .

@@ -63,12 +63,6 @@ class Login extends React.Component {
 
     e.preventDefault();
     let api_url = `${process.env.REACT_APP_URL}` ;
-    alert(api_url)
-    if(api_url){
-      alert("yes")
-    }else{
-      alert("no")
-    }
     axios
       .post(api_url+"/admin/login",
         {

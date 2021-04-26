@@ -7,9 +7,5 @@ RUN npm ci
 ARG REACT_APP_URL
 ENV REACT_APP_URL $REACT_APP_URL
 COPY . .
-RUN npm run build
-
-FROM nginx
-COPY front-end.nginx /
-RUN mv front-end.nginx /etc/nginx/conf.d/default.conf
-COPY --from=builder /usr/src/app/build /usr/share/nginx/html
+CMD ["npm", "start"]
+EXPOSE 3000

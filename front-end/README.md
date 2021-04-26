@@ -1,7 +1,7 @@
 # Front-end
 # Introduction
 * This is a client side React application 
-* Here the react app displays the application and sends the POST/GET/DELETE request to python webapp
+* Here the React app displays the application and sends the POST/GET/DELETE request to python webapp
 * This sends the request to python application, this returns the required response.
 
 # How to Run?

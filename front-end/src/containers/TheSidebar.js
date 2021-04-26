@@ -9,7 +9,7 @@ import {
   CSidebarNavTitle,
   CSidebarMinimizer,
   CSidebarNavDropdown,
-  CSidebarNavItem,
+  CSidebarNavItem, CInputGroupText
 } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react'
@@ -27,11 +27,7 @@ const TheSidebar = () => {
       onShowChange={(val) => dispatch({type: 'set', sidebarShow: val })}
     >
       <CSidebarBrand className="d-md-down-none" to="/">
-        <CIcon
-          className="c-sidebar-brand-full"
-          name="logo-negative"
-          height={35}
-        />
+        <CInputGroupText>Uber Bus App</CInputGroupText>
         <CIcon
           className="c-sidebar-brand-minimized"
           name="sygnet"
